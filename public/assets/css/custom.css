@@ -1,0 +1,157 @@
+/*------------------------ General Custom CSS ------------------------*/
+.page-header__title {
+	font-size: 36px!important;
+}
+.callouts__item-title {
+    margin-top: 2.5em;
+}
+.light h1, .light h2, .light h3, .light h4, .light h5, .light h6, .light p, .light a, .light, .light strong {
+	  color: #ffffff !important;
+}
+.center {
+	text-align:center!important;
+}
+h1 {
+	font-size: 50px;
+}
+h2 {
+	font-size: 50px;
+}
+h3, .side-side__content-title, .small-h2 h2 {
+    font-size: 18px!important;
+    font-weight: 900!important;
+    margin-bottom: 18px!important;
+}
+body, p {
+	font-size: 16px;
+	line-height: 22px;
+}
+.all-caps {
+	font-size: 18px;
+}
+.narrow {
+	max-width:650px;
+	margin:auto;
+}
+.full-width, .full-width .hero__slide-title {
+	width:100%;
+	max-width:100%;
+}
+.hero__slide-title {
+    text-shadow: 0 2px 5px rgba(17,17,20,0);
+}
+.hero__slide-title p {
+	font-size:50px;
+	line-height: 55px;
+	font-weight:300;
+}
+.we-are-committed {
+	background-image: url(/imager/assets/images/CMS/250/Product-Banner-768x216-2_ab11a86480aed644db0eb7179a981026.jpg);
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.side-side__image img {
+    padding: 10% 8%;
+}
+.side-side__content-subtitle, .fw-callout__content-subtitle {
+    font-size: 20px;
+    font-weight: 900;
+}
+.lrg-sidexside-title h3, .our-products h3.fw-callout__content-title {
+	font-size: 50px!important;
+    font-weight: 300!important;
+}
+span.light-blue, .light-blue h2, .health-callouts strong {
+	color: #00acd8!important;
+	font-weight: 900;
+}
+.we-are-committed {
+	padding-top: 10%;
+    padding-bottom: 8%;
+}
+.we-are-committed h2 {
+	margin: 0;
+    font-weight: 300;
+    line-height: 1.2;
+}
+.we-are-committed .two-col__col1 {
+	text-align: right!important;
+}
+.callout-line-height p {
+	line-height:30px;
+}
+.hero__slide-text {
+	max-width:650px;
+}
+.quote-hero h3 {
+	font-weight: 300!important;
+    font-size: 30px!important;
+    margin-bottom: 40px!important;
+}
+.btn, .btn.btn-primary, .btn.btn-submit, .btn:link, .btn:visited, button[type=submit], button[type=submit]:link, button[type=submit]:visited, input.btn, input.btn.btn-primary, input.btn.btn-submit, input[type=button], input[type=submit], input[type=submit]:link, input[type=submit]:visited {
+    padding: .75em 3em;
+}
+.nav-main .level-1>.menu-item>a:hover, .nav-main .level-1>.menu-item>a:active {
+    color: #00acd8!important;
+}
+@media screen and (min-width: 768px) {
+.nav-main .level-1>.menu-item:not(.has-children):hover>a:after {
+    width: calc(100% - 2.5em);
+    left: 1.25em;
+}
+}
+.button-top a.btn {
+    margin-top: 20px;
+}
+.sub-head-space p {
+    margin-bottom: 3em;
+}
+
+/*------------------------ Hexagonal Bullet Styling ------------------------*/
+.hex-bullets ul {
+    list-style: none!important;
+    padding: 0;
+    margin: 0;
+    text-align:left!important;
+}
+.hex-bullets ul > li {
+	list-style: none!important;
+    padding-left: 30px;
+    position: relative;
+    border-color: #0075a9;
+    margin-bottom: 15px;
+}
+.light-bullets ul > li {
+    border-color: #fff!important;
+}
+.hex-bullets ul > li:before, .hex-bullets ul > li:after {
+    position: absolute;
+    content: "";
+    left: 0%;
+    top: 10px;
+    border-color: transparent;
+    border-style: solid;
+    width: 10px;
+    height: 16px;
+    border-width: 0px 3px;
+}
+.hex-bullets ul > li:before {
+    margin-top: -23px;
+    border-bottom: 7px solid;
+    border-bottom-color: inherit;
+}
+.hex-bullets ul > li:after {
+    margin-top: 0px;
+    border-top: 7px solid;
+    border-top-color: inherit;
+}
+
+
+/*Body copy: 16 over 22 (leading)
+
+3.) Colour Style Changes: 
+Orange HEX: f78d1e
+Darker Blue HEX: 0075a9
+Lighter Blue HEX: 00acd8
+Grey HEX: 636466 */

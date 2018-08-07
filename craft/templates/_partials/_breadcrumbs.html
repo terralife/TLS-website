@@ -1,0 +1,22 @@
+{# Breadcrumbs #}
+<nav class="breadcrumbs" aria-label="breadcrumb">
+    <div class="container">
+        {% set crumbs = entry.ancestors|default([]) %}
+            <ul class="">
+                <li class="breadcrumbs__home">
+                    <a href="{{ siteUrl }}"><span class="visually-hidden">Home</span><i class="icon-home3">
+
+                    </i><!-- /.icon-home --></a></li>
+                {% for crumb in crumbs %}
+                    <li>
+                        <a href="{{ crumb.url }}">{{ crumb.title }}
+
+                        </a></li>
+                {% endfor %}
+                <li class="breadcrumbs__current">
+                    <span aria-current="page">{{ entry.title }}</span>
+                </li><!-- /.current -->
+            </ul>
+     
+    </div><!-- /.container -->
+</nav><!-- /.breadcrumbs -->

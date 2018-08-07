@@ -1,0 +1,37 @@
+{% set globalModals = modals.modals.search('modalAvailability:global') %}
+
+{# open modal JS function #}
+{% set modalJS = 'function globalModals() { ' %}
+{% set modalNumber = 1 %}
+
+{% for globalModal in globalModals %}
+    {# Define fields #}
+    {% set modalTitle = globalModal.modalTitle %}
+    {% set modalContent = globalModal.modalContent %}
+    {% set modalHtml = globalModal.modalHtml %}
+    {% set modalId = globalModal.modalid %}
+
+    <div style="display: none;">
+        <div id="{{modalId}}" class="featherlight__content" tabindex="-1" role="dialog" aria-modal="true">
+            <div class="featherlight-inner">
+                <h2 class="modal__title">
+                    {{modalTitle}}
+                </h2><!-- /.modal__title -->
+                {{ modalContent }}
+                {{ modalHtml|raw }}
+            </div><!-- /.featherlight-inner -->
+        </div><!-- /.modal__content -->
+    </div>
+
+    {# individual modal JS (featherlight setup) #}
+    {% set modalJS = modalJS ~ "var modalContent"~modalNumber~" = $('#"~modalId~"');
+    $('a[href=\"#"~modalId~"\"]').on('click', function() { $.featherlight(modalContent"~modalNumber~"); });" %}
+
+    {% set modalNumber = modalNumber + 1 %}
+
+{% endfor %}
+
+{# close modal function #}
+{% set modalJS = modalJS ~ ' }' %}
+
+{% includeJs modalJS %}

@@ -1,0 +1,74 @@
+/* =============================================================================
+Hero Page Module
+============================================================================= */
+
+.hero {
+    overflow: hidden;
+    position: relative;
+
+    &__slide {
+        position: relative;
+        cursor: move;
+        cursor: grab;
+
+        &:active {
+            cursor: grabbing;
+        }
+
+        // Background Image
+        &-image {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+
+            img {
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+                object-position: center center;
+            }
+        } // bg image Ends ---->
+
+        // Grid
+        &-grid {
+            padding: 2em 0;
+            flex-flow: row wrap;
+            align-content: center;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 250px;
+            max-height: 450px;
+
+            @media screen and (min-width: 600px) {
+                padding: 2em 0 2em 4em;   
+                height: 50vh;
+            }
+
+            // Every element on it's own line
+            * {
+                flex-basis: 100%;
+            }
+        }
+
+        // Title
+        &-title {
+            @include fluid-type(font-size, 320px, 1600px, 34px, 54px);
+            font-weight: 300;
+            color: $white;
+            text-shadow: 0 2px 5px rgba($black, 0.35);
+            max-width: 650px;
+            margin-bottom: 0;
+
+            p {
+                margin: 0;
+            }
+        }
+
+        // Button
+        &-link {
+            font-size: 1.1em;
+        }
+    } // individual slide Ends ---->
+} // hero Ends ---->

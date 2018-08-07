@@ -1,0 +1,381 @@
+/* =============================================================================
+Main Navigation (Mobile)
+============================================================================= */
+
+
+/* Hader Menu
+=================================================== */
+.nav-main {
+
+    // base UL
+    &__base {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: stretch;
+        justify-content: space-between;
+    }
+
+    // first Level LIs
+    .level-1 > li {
+        > a {
+            padding: 0.65em;
+
+        }
+
+        // ***  Hide some LIs on mobile so the menu doesn't break
+        /* Media (768px)
+        -------------------------------------------------- */
+        @media screen and (max-width: 768px) {
+        
+        &.menu-item-youritem, // Add your menu items here
+        &.menu-item-external {
+            display: none;
+        }
+        
+        } // 768px Ends ---->
+    } // first level LIs Ends ---->
+
+    // submenu ( hidden on mobile, full menu in off-canvas )
+    &__sub {
+        display: none;
+    }
+} // main nav Ends ---->
+
+
+/* Mobile Toggle
+=================================================== */
+
+.mobile-toggle {
+    position: fixed;
+    right: 1em;
+    top: 2.25em;
+    transition: all 0.25s;
+    cursor: pointer;
+    opacity: 1;
+    visibility: visible;
+
+    .hamburger {
+        position: relative;
+        display: inline-block;
+        width: 1.75em;
+        margin-left: 0.625em;
+        height: 1.25em;
+
+        span {
+            display: block;
+            position: absolute;
+            background: rgba($black, 0.75);
+            height: 3px;
+            width: 100%;
+            border-radius: 3px;
+        }
+
+        span:nth-child(1) {
+            top: 0;
+            transform: rotate(0);
+        }
+        span:nth-child(2) {
+            opacity: 1;
+            width: 75%;
+            margin-left: 20%;
+            top: calc( 50% - 2px );
+        }
+        span:nth-child(3) {
+            top: calc( 100% - 4px );
+            transform: rotate(0);
+        }
+    } // hamburger Ends ---->
+
+    .text {
+        // font-size: 0.7em;
+        // color: $primary-color;
+        text-align: center;
+        margin: 0;
+    }
+}
+
+// Move menu to bottom on scroll
+.page-scroll .mobile-toggle {
+    top: unset;
+    bottom: calc( -100vh + 1em);
+    background: $white;
+    border-radius: 50%;
+    width: 3em;
+    height: 3em;
+    box-shadow: 0 1px 5px rgba($black, 0.5em);
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+
+    .hamburger {
+        margin: 0;
+    }
+
+    .text {
+        display: none;
+    }
+} // scrolled mobile toggle Ends ---->
+
+
+/* =============================================================================
+Off-Canvas Menu
+============================================================================= */
+
+.nav-mobile {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 100%;
+    width: 100vw;
+    max-width: 700px;
+    padding: 0.5em 0.5em 0;
+    z-index: 99;
+    background: $white;
+    transition: left 0.2s ease-in-out;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    
+
+    // Open state
+    &.open {
+        left: 0;
+        transition: left 0.2s ease-in-out;
+
+
+        // Animate children items in
+        .nav-mobile__base .menu-item {
+            transform: translateX(0%);
+            opacity: 1;
+            transition: all 0.25s ease-in-out 0.25s;
+        }
+    }
+
+
+    // Logo
+    .mobile-logo {
+        margin-bottom: 1em;
+
+        a {
+            width: 225px;
+        }
+    }
+
+    // First level UL
+    &__base {
+        position: relative;
+        box-shadow: 0 2px 5px rgba($black, 0.15);
+
+        /* Media (700px)
+        -------------------------------------------------- */
+        @media screen and (max-width: 600px) {
+        
+            margin: 1em -5% 0;
+        
+        } // 700px Ends ---->
+
+
+        // Set initial animation state for menu items
+        .menu-item {
+            transform: translateX(-10%);
+            opacity: 0;
+            transition: all 0.25s ease-in-out;
+        }
+    }
+
+    // Submenu
+    &__sub {
+        margin: 0;
+        padding-left: 1em;
+        background: desaturate($primary-color, 15%);
+    }
+
+    // General LIs
+    .menu-item {
+        padding: 0.35em;
+
+        > a {
+            font-size: 1.25em;
+            color: $text-color;
+
+        }
+    } // LIs Ends ---->
+
+
+    /* Main Menu items
+    =================================================== */
+
+    // Level 1
+    &__base.level-1 > li.menu-item {
+        padding: 0;
+
+        // all a's
+        a {
+            color: $white;
+        }
+
+        // first-level a's
+       > a {
+            position: relative;
+            color: $secondary-color;
+            background: $white;
+            padding: 0.5em 1em 0.5em 1.25em;
+            border-top: 1px solid rgba($primary-color, 0.25);
+            border-bottom: 1px solid rgba($primary-color, 0.25);
+        } // a Ends ---->
+
+
+        // Active state
+        &.active > a:after {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            height: 100%;
+            width: 5px;
+            background: $tertiary-color;
+            top: 0;
+            bottom: 0;
+            left: 7px;
+        }
+
+        // sub-menu Toggle
+        .mobile-sub-toggle {
+            float: right;
+            color: $primary-color;
+
+            i {
+                display: block;
+                margin-top: 0.1em;
+                transform: rotate(0deg);
+                transition: transform 0.15s ease-in-out;
+                transform-origin: center 60%;
+            }
+        } // sub-toggle Ends ---->
+
+        &.open .mobile-sub-toggle i {
+            transform: rotate(180deg);
+            transition: transform 0.15s ease-in-out;
+        }
+
+        // sub-menu
+        .level-2 {
+            max-height: 0;
+            overflow: hidden; 
+            background: linear-gradient(190deg, rgb(121, 185, 218), rgb(3, 98, 145));
+            transition: max-height 0.25s ease-in-out;
+
+             // submenu items
+             > li a {
+                padding: 0;
+                transition: padding 0.25s ease-in-out;
+                font-size: 1em;
+            }
+
+
+
+            // Open state
+            &.open {
+                max-height: 1000px;
+                transition: max-height 0.4s ease-in-out;
+
+                // submenu items
+                > li {
+
+                    &:first-child > a {
+                        padding-top: 1em;
+                    }
+
+                    &:last-child > a {
+                        padding-bottom: 1em;
+                    }
+                } // lis Ends ---->
+
+                > li a {
+                    padding: 0.2em 1em;
+                    transition: padding 0.25s ease-in-out;
+                }
+
+
+            // Active state
+            li.active > a {
+                font-weight: 700;
+            }
+            } // open state Ends ---->
+        } // level2 Ends ---->
+
+    } // menu items Ends ---->
+
+
+    /* Close button
+    =================================================== */
+    &__close {
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding: 0.5em;
+        cursor: pointer;
+        z-index: 9;
+        background: rgba($primary-color, 0.5);
+
+        i {
+            // TODO - get icon and replace styles
+            display: block;
+            width: 20px;
+            height: 20px;
+            font-size: 20px;
+            transform: rotate(45deg);
+            color: $white;
+        }
+    } // close Ends ---->
+
+
+
+   /* Search
+   =================================================== */
+    .mobile-search {
+        width: calc( 100% - 10px );
+
+        .search-input {
+            background: $white;
+            border: 1px solid rgba($quad-color, 0.5);
+            font-weight: 300;            
+        } // input Ends ---->
+
+        :-webkit-input-placeholder,
+        ::-moz-placeholder,
+        :-ms-input-placeholder,
+        :-moz-placeholder  {
+            color: $secondary-color;
+        }
+    } // mobile search Ends ---->
+
+
+    /* Pre Nav
+    =================================================== */
+    .nav-pre {
+        width: 100%;
+
+        &__base {
+            display: flex;
+            margin: 0;
+        }
+        .menu-item {
+            font-size: 0.6em;
+        }
+    } // prenav Ends ---->
+
+
+
+
+    /* Social Icons
+    =================================================== */
+    .social-icons {
+        padding: 2em 0;
+        justify-content: center;
+
+        &__item {
+            font-size: 1.5em;
+        }
+    } // social icons Ends ---->
+
+} // off-canvas menu Ends ---->

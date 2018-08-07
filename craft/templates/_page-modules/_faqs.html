@@ -1,0 +1,24 @@
+<section class="faq-module">
+    <div class="container">
+        <h2 class="faq-module__title">
+            {{ block.faqSectionTitle }}
+        </h2><!-- /.faq-module__title -->
+        <div class="faq-module__grid">
+            {% for faq in block.children %}
+                
+                <div class="faq-module__item">
+                    <h3 class="faq-module__item-title">
+                        <span class="faq-module__item-toggle">
+                            <i class="icon-chevron-down"></i><!-- /.icon-chevron-down -->
+                        </span><!-- /.faq-module__item-toggle -->
+                        {{ faq.faqTitle }}
+                    </h3><!-- /.faq-module__item-title -->
+                    <div class="faq-module__item-content">
+                        {{ faq.faqContent }}
+                    </div><!-- /.faq-module__item-content -->
+                </div><!-- /.faq-module__item -->
+                
+            {% endfor %}
+        </div><!-- /.faq-module__grid -->
+    </div><!-- /.container faq-module__grid -->
+</section><!-- /.faq-module -->

@@ -1,0 +1,12 @@
+<div class="social-icons">
+        {% set socialIcons = socialMedia.socialMedia.level(1) %}
+    <ul>
+        {% nav icon in socialIcons %}
+            <li class="social-icons__item">
+                <a href="{{icon.linkExternalUrl}}" target="_blank">
+                    <i class="icon-{{ icon.socialMediaPlatform }}"></i>
+                </a>
+            </li><!-- /.social-icons__item -->
+        {% endnav %}
+    </ul><!-- /.social-icons -->
+</div><!-- /.social-icons -->

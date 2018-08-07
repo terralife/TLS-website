@@ -1,0 +1,95 @@
+/* =============================================================================
+Main Footer
+============================================================================= */
+
+.footer {
+    margin-top: 0;
+    order: 99;
+    background: $primary-color url('/assets/images/footer-bg.jpg');
+    background-size: cover;
+    background-position: right center;
+    padding: 3em 0;
+    color: $white;
+    // font-size: 0.83em;
+    letter-spacing: 0.05em;
+    box-shadow: 0 20px 40px rgba($black, 0.35) inset;
+
+    /* Media (540px)
+    -------------------------------------------------- */
+    @media screen and (max-width: 540px) {
+    
+    padding-bottom: 5em;
+    
+    } // 540px Ends ---->
+
+    a {
+        color: $white;
+    }
+
+    &__grid {
+        display: flex;
+        align-items: stretch;
+        justify-content: space-between;
+        flex-flow: row wrap;
+        @media screen and (min-width: 768px) {
+            // flex-wrap: nowrap;
+        }
+    } // grid Ends ---->
+
+
+    // copyright
+    &__copyright {
+
+            order: 10;
+            flex-basis: 100%;
+
+    } // copyright Ends ---->
+
+
+    // Menu
+    &__menu {
+        // margin-left: auto;
+
+        .nav-footer {
+            &__base {
+                display: flex;
+                margin: 0 1.5em 0 0;
+
+                .menu-item {
+                    margin: 0; 
+
+                    &:not(:first-of-type) a{
+
+                        &:before {
+                            content: '|';
+                            display: inline-block;
+                            color: rgba($white, 0.5);
+                            padding: 0 0.3em; 
+
+                            /* Media (768px)
+                            -------------------------------------------------- */
+                            @media screen and (min-width: 768px) {
+                            
+                            padding: 0 1em;
+                            
+                            } // 768px Ends ---->
+                        }
+                    } // a Ends ---->
+                } // menu item Ends ---->
+
+            } // base Ends ---->
+        } // footer nav Ends ---->
+    } // menu Ends ---->
+
+    .social-icons {
+        padding: 2em 0 0;
+
+        /* Media (769px)
+        -------------------------------------------------- */
+        @media screen and (min-width: 769px) {
+        
+            display: inline-block;
+        
+        } // 769px Ends ---->
+    }
+} // footer Ends ---->

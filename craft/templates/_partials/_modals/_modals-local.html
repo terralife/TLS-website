@@ -1,0 +1,42 @@
+{# open modal JS function #}
+{% set localModalJS = 'function localModals() { ' %}
+{% set localModalNumber = 1 %}
+
+{% for block in entry.modalInclude %}
+    {% set chosenModals = block.modalIncludeId %}
+    {% set globalSpecificModals = modals.modals.search('modalAvailability:local}') %}
+    {% for localModal in globalSpecificModals %}
+        {% if chosenModals == localModal.modalid %}
+
+            {% set modalTitle = localModal.modalTitle %}
+            {% set modalContent = localModal.modalContent %}
+            {% set modalHtml = localModal.modalHtml %}
+            {% set modalId = localModal.modalid %}
+        
+            <div style="display: none;">
+                <div id="{{modalId}}" class="featherlight__content" tabindex="-1" role="dialog" aria-modal="true">
+                    <div class="featherlight-inner">
+                        <h2 class="modal__title">
+                            {{modalTitle}}
+                        </h2><!-- /.modal__title -->
+                        {{ modalContent }}
+                        {{ modalHtml|raw }}
+                    </div><!-- /.featherlight-inner -->
+                </div><!-- /.modal__content -->
+            </div>
+
+            {# individual modal JS (featherlight setup) #}
+            {% set localModalJS = localModalJS ~ "var modalContent"~localModalNumber~" = $('#"~modalId~"');
+            $('a[href=\"#"~modalId~"\"]').on('click', function() { $.featherlight(modalContent"~localModalNumber~"); });" %}
+
+            {% set localModalNumber = localModalNumber + 1 %}
+
+        {% endif %}
+    {% endfor %}
+{% endfor %}
+
+{# close modal function #}
+{% set localModalJS = localModalJS ~ ' }' %}
+
+{% includeJs localModalJS %}
+

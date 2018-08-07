@@ -1,0 +1,104 @@
+/*=================================================
+General Mixins
+=================================================== */
+
+// vertically align element
+@mixin v-align {
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+/*=================================================
+Button Mixins
+=================================================== */
+
+// Any Colored Button
+// Background color, background opacity (default: 100%), text-color (default: white)
+@mixin button-bg($bg, $opacity: 1, $text: $white) {
+	background: rgba($bg, $opacity);
+	border-color: rgba($bg, $opacity);
+	color: $text;
+	&:hover {
+		background: darken(desaturate(rgba($bg, $opacity), 0%), 5%);
+		transition: all 0.3s ease;
+		color: $text;
+	}
+	&:active {
+		background: darken($bg, 25%);
+	}
+
+	&:focus {
+		background: darken(desaturate(rgba($bg, $opacity), 10%), 15%);
+		transition: all 0.3s ease;
+	}
+}
+
+
+
+/*=================================================
+Fluid Typography
+=================================================== */
+// ----
+// libsass (v3.5.0.beta.2)
+// ----
+
+// =========================================================================
+//
+//  PRECISE CONTROL OVER RESPONSIVE TYPOGRAPHY FOR SASS
+//  ---------------------------------------------------
+//  Indrek Paas @indrekpaas
+//
+//  Inspired by Mike Riethmuller's Precise control over responsive typography
+//  http://madebymike.com.au/writing/precise-control-responsive-typography/
+//
+//  Borrowed `strip-unit` function from Hugo Giraudel
+//  https://css-tricks.com/snippets/sass/strip-unit-function/
+//
+//  02.04.2018 Remove `screen` keyword from media queries
+//  11.08.2016 Remove redundant `&` self-reference
+//  31.03.2016 Remove redundant parenthesis from output
+//  02.10.2015 Add support for multiple properties
+//  24.04.2015 Initial release
+//
+// =========================================================================
+
+@mixin fluid-type($properties, $min-vw, $max-vw, $min-value, $max-value) {
+	@each $property in $properties {
+	  #{$property}: $min-value;
+	}
+  
+	@media (min-width: $min-vw) {
+	  @each $property in $properties {
+		#{$property}: calc(#{$min-value} + #{strip-unit($max-value - $min-value)} * (100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)});
+	  }
+	}
+  
+	@media (min-width: $max-vw) {
+	  @each $property in $properties {
+		#{$property}: $max-value;
+	  }
+	}
+  }
+  
+  @function strip-unit($number) {
+	@if type-of($number) == "number" and not unitless($number) {
+	  @return $number / ($number * 0 + 1);
+	}
+  
+	@return $number;
+  }
+	
+	
+	/*=================================================
+	How to Use
+	=================================================== */
+  /* Single property */
+//   html {
+// 	@include fluid-type(font-size, 320px, 1366px, 14px, 18px);
+//   }
+  
+//   /* Multiple properties with same values */
+//   h1 {
+// 	@include fluid-type(padding-bottom padding-top, 20em, 70em, 2em, 4em);
+//   }
+  

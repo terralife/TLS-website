@@ -1,0 +1,209 @@
+/*=================================================
+Inputs
+=================================================== */
+
+
+/*=================================================
+Base Inputs Styles
+=================================================== */
+
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  input[type="url"],
+  input[type="number"],
+  input[type="date"],
+  input[type="time"],
+  input[type="tel"],
+  input[type="search"],
+  input[type="select"],
+  textarea {
+    color: darken($text-color, 15%);
+    background-color: #f1f1f1;
+    border-color: $border-color;
+    border-width: 0px;
+    border-style: solid;
+    border-radius: 0;
+    width: 100%;
+    max-width: 100%;
+    padding: 0.25em 0.5em;
+    height: 2.5em;
+    box-sizing: border-box;
+    outline: none;
+    line-height: 1;
+    font-weight: 400;
+    transition: border-color, 0.25s;
+    //box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15) inset;
+  }
+
+  /* Textarea Overides */
+  textarea {
+    height: auto;
+    min-height: 5em;
+    padding: 0.5em;
+  }
+
+  /* File Upload Overides */
+  input[type="file"] {
+    border: none;
+    box-shadow: none;
+    height: auto;
+  }
+
+  /* Search Overide */
+  article .search-excerpt {
+    background-color: rgba($tertiary-color, 0.75);
+    text-transform: capitalize;
+  }
+
+  input:disabled {
+    background: #efefef;
+    color: #aaa;
+  }
+
+
+
+
+  /*  Focus Styling  */
+  /*  ---------------------------------------------------*/
+
+  input[type="text"]:focus,
+  input[type="search"]:focus,
+  input[type="password"]:focus,
+  input[type="email"]:focus,
+  input[type="url"]:focus,
+  input[type="number"]:focus,
+  input[type="date"]:focus,
+  input[type="time"]:focus,
+  input[type="tel"]:focus,
+  textarea:focus {
+    transition: box-shadow 0.25s;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(148, 148, 148, 0.25) inset;
+  }
+
+
+
+
+  /*  Labels  */
+  /*  ---------------------------------------------------*/
+
+  label {
+    display: inline;
+    margin-right: 0.5em;
+    font-size: 0.9em;
+    color: lighten($text-color, 25%);
+    font-weight: 300;
+  }
+
+
+
+
+  /*=================================================
+  Checkboxes and Radios
+  =================================================== */
+
+  // This will create a checkable circle or square. 
+  // You need to include a label with a for="my-field" property
+  // And a <span></span> directly after the label
+
+  // Base styles
+  input[type="radio"],
+  input[type="checkbox"] {
+    top: -0.5em;
+    margin-bottom: 0.5em;
+    visibility: hidden;
+    width: 0em;
+
+    /* Create new input */
+    + span::before,
+    + label::before {
+      content: '';
+      visibility: visible;
+      display: inline-block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1.5em;
+      height: 1.5em;
+      background: $white;
+      border: 1px solid rgba(gray, 0.5);
+      transition: background, 0.25s;
+    }
+
+    + label {
+        padding-left: 2.5em;
+        padding-top: 0.15em;
+    }
+
+    &:checked + span::before,
+    &:checked + label::before {
+      background: $tertiary-color;
+      opacity: 1;
+      transition: background, 0.25s;
+    }
+
+    /* checkmark */
+    &:checked + span::after,
+    &:checked + label::after  {
+      content: '';
+      border: 3px solid $white;
+      display: inline-block;
+      visibility: visible;
+      position: absolute;
+      left: 0.25em;
+      top: 0.4em;
+      width: 0.9em;
+      height: 0.4em;
+      border-top-width: 0;
+      border-right-width: 0;
+      transform: rotate(-45deg);
+    }
+
+  } // Input Ends ---->
+
+
+  /* Radios
+  =================================================== */
+
+  input[type="radio"]:before {
+    border-radius: 50%;
+  } // Input Ends ---->
+
+
+
+  /* Select Fields
+  =================================================== */
+
+  // This will create a consistent look for select fields
+  // Wrap your select field in <div class="list-select-wrap">  <your-select-field>  </div>
+
+  .list-select-wrap {
+    display: block;
+    height: 2.5em;
+    border-radius: 0;
+    background: #f1f1f1;
+    transition: box-shadow 0.25s;
+  
+    &:focus {
+      transition: box-shadow 0.25s;
+      box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(148, 148, 148, 0.25) inset;
+    }
+  
+    select {
+      background: transparent;
+      border: none;
+      color: darken($text-color, 15%);
+      font-weight: 400;
+    //   font-size: 14px;
+      line-height: 1;
+      height: 2.5em;
+      padding: 5px; /* If you add too much padding here, the options won't show in IE */
+      width: 100%;
+  
+      &:focus {
+        outline: none;
+        border: none;
+      }
+    } // Select Field Ends ---->
+  } // wrapping element Ends ---->
+  

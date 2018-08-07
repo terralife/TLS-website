@@ -1,0 +1,32 @@
+{#
+#  Single Page Entry
+#
+#}
+
+{% extends "_layout" %}
+
+{% block content %}
+<article class="page h-entry" id="content">
+
+    {# Page Header #}
+    {% if entry.displayPageHeader %}
+    {% include '_partials/_page-header.html' %}
+    {% endif %}
+
+    {# Breadcrumbs #}
+    {# 
+    {% include '_partials/_breadcrumbs.html' %}
+    #}
+
+    {# PageModules (Neo Field) #}
+    {% for block in entry.pageModules.level(1) %}
+        {% include ["_page-modules/_" ~ block.type] %}
+    {% endfor %}
+
+</article><!-- /.h-entry -->
+
+{# Include local modals #}
+{% include '_partials/_modals/_modals-local.html' %}
+
+
+{% endblock %}

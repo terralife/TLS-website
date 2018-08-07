@@ -1,0 +1,151 @@
+/* =============================================================================
+Side By Side module
+============================================================================= */
+
+.side-side {
+
+    /* Row Layout
+    =================================================== */
+    &__flex {
+        justify-content: center;
+        align-items: stretch;
+        flex-flow: row nowrap;
+
+        > * {
+            /* Media (769px)
+            -------------------------------------------------- */
+            @media screen and (min-width: 769px) {
+            
+                flex: 0 0 50%;
+                max-width: 50%;
+            
+            } // 769px Ends ---->
+
+        }
+
+        /* Media (768px)
+        -------------------------------------------------- */
+        @media screen and (max-width: 768px) {
+        
+        width: 100%;
+        margin: 0 auto;
+        padding: 1em 0;
+        
+        } // 768px Ends ---->
+    } // flex Ends ---->
+
+
+    /* Content
+    =================================================== */
+
+    // Image side
+    &__image {
+        position: relative;
+
+        img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            object-position: center;
+            // IE Polyfill
+            font-family: 'object-fit: cover; object-position: center;';
+        }
+    } // image Ends ---->
+
+
+    // content side
+    &__content {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: flex-start;
+
+        &-inner {
+            height: 100%;
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: center;
+            align-items: flex-start;
+            max-width: 100%;
+            padding: 2em 2em 0;
+            
+            /* Media (900px)
+            -------------------------------------------------- */
+            @media screen and (min-width: 900px) {
+            
+                max-width: 400px;
+                padding: 0;
+            
+            } // 900px Ends ---->
+
+            /* Media (1150px)
+            -------------------------------------------------- */
+            @media screen and (min-width: 1150px) {
+            
+            max-width: 500px;
+            
+            } // 1150px Ends ---->
+        }
+
+        &-subtitle {
+            font-size: 0.75em;
+            text-transform: uppercase;
+            margin-bottom: 0.95em;
+            font-weight: 400;
+            color: $primary-color-light;
+        }
+
+        &-title {
+            @include fluid-type(font-size, 320px, 1600px, 36px, 52px);
+            text-transform: none;
+            color: $primary-color;
+            font-weight: 300;
+            margin-bottom: 0.25em;
+        }
+
+        &-caption {
+            max-width: 100%;
+            font-size: 18px;
+            line-height: 1.3;
+
+            p:first-child {
+                margin-top: 0;
+            }
+        } // caption Ends ---->
+    } // content Ends ---->
+
+    
+    /* Left/right Layout
+    =================================================== */
+    /* Media (768px)
+    -------------------------------------------------- */
+    @media screen and (min-width: 768px) {
+    
+        // right
+        &.imageOnRight {
+            .side-side__image {
+                order: 2;
+            }
+
+            .side-side__content {
+                padding-right: 4em;
+
+                &-inner {
+                    margin-right: 0;
+                    margin-left: auto;
+                }
+            }
+        } // right Ends ---->
+
+        // left
+        &.imageOnLeft {
+            .side-side__image {
+            }
+
+            .side-side__content {
+                padding-left: 4em;
+            }
+        } // left Ends ---->
+    } // 768px Ends ---->
+    
+} // side by side Ends ---->

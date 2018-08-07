@@ -1,0 +1,68 @@
+{% set addCalloutClass = block.addCalloutClass %}
+{% set fwCalloutBgImage = block.fwCalloutBackgroundImage.first() %}
+{% set fwCalloutBgColor = block.fwCalloutBackgroundColor %}
+{% set fwCalloutLayout = block.fwCalloutLayout %}
+{% set fwCalloutPreTitle = block.fwCalloutPreTitle %}
+{% set moduleTextLayout = block.textBlockLayout %}
+{% set moduleTextBlueTitle = block.moduleTextBlueTitle %}
+{% set fwCalloutTitle = block.fwCalloutTitle %}
+{% set fwCalloutCaption = block.fwCalloutContent %}
+{% set fwCalloutLinkText = block.linkText %}
+{% set fwCalloutTextAlign = block.fwCalloutTextAlign %}
+{% set fwCalloutTextInvert = ( block.fwCalloutInvertTextColor ? 'style=color:white; ' : '' ) %}
+
+<section class="fw-callout {% if block.addCalloutClass %}{{ addCalloutClass }}{% endif %}" style="background-color: {{ fwCalloutBgColor }};">
+
+    <div class="fw-callout__overlay" style="background-color: {{ fwCalloutBgColor }};"></div><!-- /.fw-callout__overlay -->
+
+    {% if fwCalloutBgImage %}
+        {% set fwCalloutBgImageCrop = craft.imager.transformImage(fwCalloutBgImage,
+            [
+                { width: 1440 },
+                { width: 768, jpegQuality: 65 },
+            ],
+            {
+                format: 'jpg',
+                allowUpscale: false,
+                mode: 'crop',
+                jpegQuality: 80,
+                position: fwCalloutBgImage.focusPctX ~ '% ' ~ fwCalloutBgImage.focusPctY ~ '%',
+                interlace: true
+            }
+        ) %}
+            
+        <figure role="group" class="fw-callout__bg" style="background-color: {{ fwCalloutBgColor }};">
+                <img class="lazyload" src="/assets/images/pre-lazy-load.png" data-src="{{ fwCalloutBgImageCrop[1].url }}"
+                data-sizes="(max-width: 1440px) 100vw, (min-width: 1440px) 1440px"
+                data-srcset="{{ craft.imager.srcset(fwCalloutBgImageCrop) }}"
+                alt="{{ fwCalloutBgImage.imageAlt }}" style="object-position: {{ fwCalloutBgImage.focusPctX }}% {{ fwCalloutBgImage.focusPctY }}%;">
+        </figure><!-- /.fw-callout__bg -->
+    {% endif %}
+
+    <div class="fw-callout__grid flex container {{ fwCalloutLayout }}">
+        <div class="fw-callout__content {{ fwCalloutTextAlign }}">
+            <div class="fw-callout__content-inner">
+                {% if fwCalloutPreTitle %}
+                <h4 class="fw-callout__content-subtitle" {{fwCalloutTextInvert}}>
+                    {{ fwCalloutPreTitle }}
+                </h4><!-- /.fw-callout__content-subtitle -->
+                {% endif %}
+                {% if fwCalloutTitle %}
+                <h3 class="fw-callout__content-title" {{fwCalloutTextInvert}}>
+                    <span class="light-blue">{{ moduleTextBlueTitle }}</span> {{ fwCalloutTitle }}
+                </h3><!-- /.fw-callout__content-title -->
+                {% endif %}
+                {% if fwCalloutCaption %}
+                <div class="fw-callout__content-caption" {{fwCalloutTextInvert}}>
+                    {{ fwCalloutCaption }}
+                </div><!-- /.fw-callout__content-caption -->
+                {% endif %}
+                {% if fwCalloutLinkText %}
+                <a href="" class="fw-callout__content-link btn btn-primary">
+                    {{ fwCalloutLinkText }}
+                </a><!-- /.fw-callout__content-link btn btn-secondary -->
+                {% endif %}
+            </div><!-- /.fw-callout__content-inner -->
+        </div><!-- /.fw-callout__content -->
+    </div><!-- /.fw-callout__grid flex container -->
+</section><!-- /.fw-callout -->

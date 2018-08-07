@@ -1,0 +1,171 @@
+{#
+ # Layout Wrapper
+ # ---------------
+ #
+ #}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+{% minify %}
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		{% hook 'seomaticRender' %}
+		<title>{% if title is defined %}{{ title }} - {% endif %}{{ siteName }}</title>
+		<link rel="home" href="{{ siteUrl }}" />
+		{# Set static asset version number for cache-busting #}
+		{% set staticAssetsVersion = craft.config.environmentVariables.staticAssetsVersion %}
+		<script>
+			// LoadJS dependency manager
+			loadjs=function(){var l=function(){},c={},f={},u={};function s(e,n){if(e){var t=u[e];if(f[e]=n,t)for(;t.length;)t[0](e,n),t.splice(0,1)}}function o(e,n){e.call&&(e={success:e}),n.length?(e.error||l)(n):(e.success||l)(e)}function h(t,r,i,c){var s,o,e=document,n=i.async,f=(i.numRetries||0)+1,u=i.before||l,a=t.replace(/^(css|img)!/,"");c=c||0,/(^css!|\.css$)/.test(t)?(s=!0,(o=e.createElement("link")).rel="stylesheet",o.href=a):/(^img!|\.(png|gif|jpg|svg)$)/.test(t)?(o=e.createElement("img")).src=a:((o=e.createElement("script")).src=t,o.async=void 0===n||n),!(o.onload=o.onerror=o.onbeforeload=function(e){var n=e.type[0];if(s&&"hideFocus"in o)try{o.sheet.cssText.length||(n="e")}catch(e){n="e"}if("e"==n&&(c+=1)<f)return h(t,r,i,c);r(t,n,e.defaultPrevented)})!==u(t,o)&&e.head.appendChild(o)}function t(e,n,t){var r,i;if(n&&n.trim&&(r=n),i=(r?t:n)||{},r){if(r in c)throw"LoadJS";c[r]=!0}!function(e,r,n){var t,i,c=(e=e.push?e:[e]).length,s=c,o=[];for(t=function(e,n,t){if("e"==n&&o.push(e),"b"==n){if(!t)return;o.push(e)}--c||r(o)},i=0;i<s;i++)h(e[i],t,n)}(e,function(e){o(i,e),s(r,e)},i)}return t.ready=function(e,n){return function(e,t){e=e.push?e:[e];var n,r,i,c=[],s=e.length,o=s;for(n=function(e,n){n.length&&c.push(e),--o||t(c)};s--;)r=e[s],(i=f[r])?n(r,i):(u[r]=u[r]||[]).push(n)}(e,function(e){o(n,e)}),t},t.done=function(e){s(e,[])},t.reset=function(){c={},f={},u={}},t.isDefined=function(e){return e in c},t}();
+		</script>
+		<link rel="stylesheet" href="/assets/css/main.min.{{staticAssetsVersion}}.css">
+		<link rel="stylesheet" href="/assets/css/custom.{{staticAssetsVersion}}.css">
+	</head>
+	{% endminify %}
+
+	<body>
+		{% if scripts.headerScripts %}
+			{{ scripts.headerScripts }}
+		{% endif %}
+
+		<div class="wrapper">
+
+			<h1 class="visually-hidden">{{ seomaticMeta.seoTitle }}</h1><!-- /.visually-hidden -->
+
+			<a href="#content" class="skip">Skip to Content</a><!-- /.skip -->
+
+			{% block header %}
+			{% minify %}
+			{# Note - you can override any block on a specific page by re-declaring it.
+			# Use this to display a different header, footer, or page-content block on that page #}
+
+			<header id="main-header" class="header">
+
+				<section class="pre-header">
+					{# Include Pre-header Nav on desktop #}
+					{% if craft.request.isMobileBrowser() == false  %}
+						{% include '_partials/_nav/_preheader-nav.html' %}
+					{% endif %}
+				</section><!-- /.pre-header container -->
+			
+					<div class="container flex header__grid">
+
+						<a href="/" class="header__logo">
+							<img src="{{ globals.siteLogo.first().url }}" alt="{{ seomaticSiteMeta.siteSeoName }}">
+						</a><!-- /.header__logo -->
+
+						{# Include Main Navigation #}
+						{% include '_partials/_nav/_main-navigation.html' %}
+					</div><!-- /.container flex -->
+				</header>
+				{% endminify %}
+			{% endblock %}
+			
+			
+			{% block content %}
+			{% endblock %}
+
+			{% block footer %}
+			{% minify %}
+
+				{# Include Client Logos #}
+				{% include '_partials/_client-strip.html' %}
+
+				<footer id="main-footer" class="footer">
+					<div class="container footer__grid">
+						{# Include Footer Nav #}
+						{% include '_partials/_nav/_footer-nav.html' %}
+						<div class="footer__copyright">
+							Ⓒ {{ "now"|date("Y") }} <strong>Terra Life Sciences</strong>
+							{# Include Social Icons #}
+						{% include '_partials/_social-icons.html' %}
+						
+						</div><!-- /.footer__copyright -->
+
+						
+
+						
+						
+					</div><!-- /.container flex footer__grid -->
+				</footer>
+				{% endminify %}
+			{% endblock %}
+				
+
+
+			{% minify %}
+			<script>
+			// asynchronously load main site JS with LoadJS, Cache-bust it
+			loadjs( ['/assets/js/main.min.{{staticAssetsVersion}}.js'],	'main-js' );
+
+			// Callback for when JS has loaded. 
+			// You can include additional file loads here, useful for polyfills
+			// jquery is included inside the main.min.js file
+			loadjs.ready('main-js', {
+				success: function() {
+					console.log('Main JS Loaded');
+
+					// CSS grid polyfill if needed
+					if (!Modernizr.cssgrid) {
+						loadjs(	['/assets/js/polyfills/css-grid-polyfill.min.js'	], 'polyfill-cssgrid' );
+						console.log('no grid');
+					  } // End CSS grid check
+
+
+					// CSS object-fit polyfill if needed
+					if (!Modernizr.cssobjectfit) {
+						loadjs(	['/assets/js/polyfills/css-objectfit-polyfill.min.js'	], 'polyfill-cssobjectfit' );
+						console.log('no object-fit');
+					  } // End CSS grid check
+
+					// Load modal code from '_partials/_modals/_global-modals.html'
+					if (typeof globalModals == 'function') { 
+						globalModals();
+					}
+
+					// Load modal code from '_partials/_modals/_local-modals.html'
+					if (typeof localModals == 'function') { 
+						localModals();
+					}
+
+
+				} // End successfully load main JS
+			});
+
+			</script>
+
+			{# CSRF for contact forms #}
+			<script type="text/javascript">
+				window.csrfTokenName = "{{ craft.config.csrfTokenName|e('js') }}";
+				window.csrfTokenValue = "{{ craft.request.csrfToken|e('js') }}";
+			</script>
+			{% endminify %}
+
+		</div><!-- /.wrapper -->
+
+		{# Include off-canvas mobile menu #}
+		{# {% if craft.detect.isMobile %} #}
+			{% include '_partials/_nav/_off-canvas-nav.html' %}
+		{# {% endif %} #}
+
+		{# Include Global Modal html #}
+		{% include '_partials/_modals/_modals-global.html' %}
+
+		{# Include Footer Scripts #}
+		{% if scripts.footerScripts %}
+			{{ scripts.footerScripts }}
+		{% endif %}
+
+
+		{# Include Custom CSS #}
+		{% if css.customCss %}
+			{% minify %}
+				<style>
+					{{ css.customCss|raw }}
+				</style>
+			{% endminify %}
+		{% endif %}
+
+	</body>
+</html>

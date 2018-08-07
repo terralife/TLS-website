@@ -1,0 +1,48 @@
+/* =============================================================================
+Forms and Input Groups
+============================================================================= */
+
+.contact-form {
+
+    &__grid {
+        flex-flow: row wrap;
+        justify-content: space-between;
+        align-items: stretch;
+    }
+
+    // Default all input groups to 100% on mobile
+    &__input-full,
+    &__input-half,
+    &__input-third {
+        flex-basis: 100%;
+        margin-bottom: 1em;
+        max-height: 25em;
+    
+        p {
+            margin: 0;
+        }
+    } // form layout Ends ---->
+    
+    /* Media (768px)
+    -------------------------------------------------- */
+    @media screen and (min-width: 768px) {
+    
+        &__input-half {
+            flex-basis: 49.5%;
+    
+            &:first-child {
+                margin-right: 1%;
+            }
+        } // form half Ends ---->
+    
+        &__input-third {
+            flex-basis: 32%;
+    
+            &:nth-child(2),
+            &:nth-child(3) {
+                margin-right: 1%;
+            }
+        } // form third Ends ---->
+    
+    } // 768px Ends ---->
+} // contact form Ends ---->

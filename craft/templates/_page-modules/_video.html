@@ -1,0 +1,19 @@
+{# Define Fields #}
+{% set videoTitle = block.videoTitle %}
+{% set videoCaption = block.videoCaption %}
+{% set videoURL = block.videoUrl %}
+{% set videoBGColor = block.videoBackgroundColor %}
+
+<section class="video-embed" style="background-color: {{ videoBGColor }}">
+    <div class="container">
+        <h2 class="video-embed__title">
+          {{ videoTitle }}  
+        </h2><!-- /.video__title -->
+        <div class="video-embed__caption">
+            {{ videoCaption }}
+        </div><!-- /.video__caption -->
+        <div class="video-embed__item">
+            {{ videoURL|raw }}
+        </div><!-- /.video__item -->
+    </div><!-- /.container -->
+</section><!-- /.video -->

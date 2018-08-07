@@ -1,0 +1,50 @@
+/* =============================================================================
+Contact Page
+============================================================================= */
+
+.main-contact {
+
+    &__grid {
+        flex-flow: row wrap;
+        align-items: stretch;
+        justify-content: space-between;
+    }
+
+    &__location {
+        flex: 0 1 30%;
+        
+        /* Media (768px)
+        -------------------------------------------------- */
+        @media screen and (min-width: 768px) {
+        
+        margin-top: 3.8em;
+        
+        } // 768px Ends ---->
+
+        &-map {
+            margin-bottom: 1em;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        h4 {
+            font-size: 1em;
+            margin: 0 0 0.5em;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        i {
+            margin-right: 1em;
+        }
+
+    } // location Ends ---->
+
+    &__form {
+        flex: 0 1 66%;
+    }
+} // contact page Ends ---->

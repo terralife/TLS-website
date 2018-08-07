@@ -1,0 +1,66 @@
+{% if mobileNavigation.mobileMenuUnique %}
+    {% set navigation = mobileNavigation.mobileNavigation.level(1) %}
+{% else %}
+    {% set navigation = mainNavigation.mainNavigation.level(1) %}
+{% endif %}
+
+<nav class="nav-mobile" id="off-canvas-menu" aria-label="mobile menu">
+
+    <div class="mobile-logo">
+        <a href="/" class="header__logo">
+            <img src="{{ globals.siteLogo.first().url }}" alt="{{ seomaticMeta.seoTitle }}">
+        </a><!-- /.header__logo -->
+    </div><!-- /.menu-item-top menu-item-logo -->
+
+    <div class="nav-mobile__close" id="mobile-close"><i class="icon-plus"></i></div><!-- /#mobile-close -->
+
+    {# <div class="field-group mobile-search">
+        <input type="search" class="search-input" placeholder="Search Site">
+    </div><!-- /.field-group mobile-search --> #}
+
+    {# Include Pre-header Nav #}
+    {% include '_partials/_nav/_preheader-nav.html' %}
+
+    <ul class="nav-mobile__base level-1">
+
+           {# 
+            <li class="menu-item-top menu-item-logo">
+                <a href="/" class="header__logo">
+                    <img src="{{ globals.siteLogo.first().url }}" alt="{{ seomaticMeta.seoTitle }}">
+                </a><!-- /.header__logo -->
+            </li><!-- /.menu-item-top menu-item-logo -->
+            #}
+
+
+        {% nav node in navigation %}
+
+            {# Top Level Items #}
+            <li class="menu-item menu-item-top menu-item-{{ ( node.linkExternal ? 'external' : node.linkInternal.first().slug ) }}{{ (node.children|length ? ' has-children' : '' ) }}{{ ( node.linkExternal ? '' : (node.linkInternal.first().uri == craft.request.getSegment(node.level)|lower ? ' active' : '') ) }}">
+                {% set nodeUrl = ( node.linkExternal ? node.linkExternalUrl : node.linkInternal.first().url ) %}
+                <a href="{{ url(nodeUrl|lower) }}" title="{{ node.linkText }}"{% if node.linkTarget %} target="_blank" rel="noopener noreferrer"{% endif %}>
+                    {{ node.linkText }}
+                    {{ ( node.children|length ? '<span class="mobile-sub-toggle"><i class="icon-chevron-down"></i></span>' : '' ) }}
+                </a>
+
+                {# sub Items #}
+                {% if node.children is not empty %}
+                    <ul class="nav-mobile__sub level-2">
+                        {% for childNode in node.children  %}
+                                {% set childNodeUrl = ( childNode.linkExternal ? childNode.linkExternalUrl : childNode.linkInternal.first().url ) %}
+                                {% set childNodeURI = craft.request.getSegment(node.level) ~ '/' ~ craft.request.getSegment(childNode.level)%}
+                            <li class="menu-item menu-item-sub menu-item-{{ ( childNode.linkExternal ? 'external' : childNode.linkInternal.first().slug ) }} {{ ( childNode.linkExternal ? '' : (childNode.linkInternal.first().uri == childNodeURI ? 'active' : '') ) }}">
+                                <a href="{{ url(childNodeUrl|lower) }}" title="{{ childNode.linkText }}"{% if childNode.linkTarget %} target="_blank" rel="noopener noreferrer"{% endif %}>
+                                    {{ childNode.linkText }}
+                                </a>
+                            </li><!-- /sub item-->
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </li><!-- /top level item -->
+        {% endnav %}
+    </ul>
+
+    {# Include Social Icons #}
+    {% include '_partials/_social-icons.html' %}
+</nav>
+    

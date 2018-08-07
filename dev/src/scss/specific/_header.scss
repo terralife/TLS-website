@@ -1,0 +1,147 @@
+/* =============================================================================
+Header
+============================================================================= */
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: $white;
+    z-index: 99;
+    transform: translateY(0%);
+    transition: height 0.2s linear, font-size 0.2s linear;
+    
+    $headerHeight: 100px;
+    height: $headerHeight;
+
+    // offset the wrapper to account for the header height
+    @at-root { .wrapper { padding-top: $headerHeight; } }
+
+    /* Media (768px)
+    -------------------------------------------------- */
+    @media screen and (min-width: 768px) {
+    
+        $headerHeight: 130px;
+        height: $headerHeight;
+
+        // offset the wrapper to account for the header height
+        @at-root { .wrapper { padding-top: $headerHeight; } }
+    
+    } // 768px Ends ---->
+
+
+    /*  Keep fixed header within wrapper bounds on larger screens
+    -------------------------------------------------- */
+    @media screen and (min-width: $site-width) {
+    
+        width: $site-width;
+        left: 50%;
+        transform: translateX(-50%);
+    
+    } // container-width query Ends ---->
+
+
+
+
+    /*=================================================
+    On Page Scroll
+    =================================================== */
+    /* Media (767px)
+    -------------------------------------------------- */
+    @media screen and (max-width: 768px) {
+
+    @at-root {
+        .page-scroll .header {
+            transform: translateY(-100%);
+            transition: all 0.25s;
+        
+        
+        } // scrolled main nav on mobile Ends ---->
+    }
+    
+    } // 767px Ends ---->
+
+
+    /* Media (768px)
+    -------------------------------------------------- */
+    @media screen and (min-width: 769px) {
+    
+        @at-root {
+            .page-scroll .header {
+
+                font-size: 0.8em;
+                height: 85px;
+                box-shadow: 0 0 3px rgba($black, 0.15);
+                transition: height 0.2s linear, font-size 0.2s linear;
+
+                * {
+                    transition: none;
+                }
+
+                &__logo {
+                    width: 11.5em;
+                }
+
+                .nav-main__base:before {
+                    top: -0.75em;
+                    transition: top 0.2s linear -0.2s, background-color 0.2s linear -0.2s;
+                    background-color: rgba($primary-color, 0.15);
+                }
+
+                .nav-main__sub {
+                    padding-top: 0.9em;
+                }
+
+                .nav-main__sub>li:first-child:before {
+                    top: -0.85em;
+                }
+            
+            } // scrolled main nav on mobile Ends ---->
+        }
+    
+    } // 768px Ends ---->
+
+
+    // Logo/Nav grid
+    &__grid {
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: center;
+        width: 95%;
+
+
+        /* Media (769px)
+        -------------------------------------------------- */
+        @media screen and (min-width: 769px) {
+        
+        width: 90%;
+        padding: 0.75em 0;
+        
+        } // 769px Ends ---->
+    }
+
+    // Logo
+    &__logo {
+        display: block;
+        position: relative;
+        width: 175px;
+
+        img {
+            max-width: 100%;
+        }
+
+        /* Media (769px)
+        -------------------------------------------------- */
+        @media screen and (min-width: 769px) {
+        
+            margin: 0.35em auto;
+            position: relative;
+            z-index: 99;
+            width: 16.625em;
+            min-width: 185px;
+            margin: -2.5em 0 0; 
+        } // 769px Ends ---->
+    } // logo Ends ---->
+
+} // header Ends ---->

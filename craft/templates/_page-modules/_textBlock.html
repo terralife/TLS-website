@@ -1,0 +1,23 @@
+{# field Declaration #}
+{% set addTextClass = block.addTextClass %}
+{% set moduleTextLayout = block.textBlockLayout %}
+{% set moduleTextBlueTitle = block.moduleTextBlueTitle %}
+{% set moduleTextTitle = block.textBlockTitle %}
+{% set moduleTextContent = block.textBlockContent %}
+
+<section class="text-block {{ moduleTextLayout }} {% if block.addTextClass %}{{ addTextClass }}{% endif %}">
+    <div class="container">
+        <div class="text-block__wrap">
+            {% if moduleTextTitle %}
+                <h2 class="text-block__title">
+                    <span class="light-blue">{{ moduleTextBlueTitle }}</span> {{ moduleTextTitle }}
+                </h2><!-- /.text-block__title -->
+            {% endif %}
+            {% if moduleTextTitle %}
+                <div class="text-block__caption">
+                    {{ moduleTextContent }}
+                </div><!-- /.text-block__caption -->
+            {% endif %}
+        </div><!-- /.text-block__wrap -->
+    </div><!-- /.container -->
+</section><!-- /.text-block -->

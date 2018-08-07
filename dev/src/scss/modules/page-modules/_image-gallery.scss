@@ -1,0 +1,132 @@
+/* =============================================================================
+Image Gallery
+============================================================================= */
+
+.image-gallery {
+    padding: 3em 0;
+
+    &__grid {
+        display: grid;
+        grid-template-rows: auto; // auto row size
+        grid-column-gap: 1em;
+        grid-row-gap: 1em;
+        justify-items: center; // horizontal align (items within column)
+        align-items: stretch; // vertical align (items within row)
+        justify-content: center; // horizontal align (grid columns themselves)
+        align-content: stretch; // vertical align (grid rows themselves)
+        grid-auto-flow: dense;
+        // grid-auto-rows: 1em;
+
+        // See this article for more grid instructions:  
+        // https://css-tricks.com/snippets/css/complete-guide-grid/
+        // you can do some crazy things, like having certain callouts expand
+        // accross multiple rows and columns
+
+        // Default to 1 column on mobile
+        grid-template-columns: 1fr;
+
+        @supports ( grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)) ) {
+
+            /* Media (600px)
+        -------------------------------------------------- */
+        @media screen and (min-width: 550px) {
+        
+            grid-template-columns: repeat(3, 1fr);
+        
+        } // 600px Ends ---->
+
+        /* Media (1000px)
+        -------------------------------------------------- */
+        @media screen and (min-width: 1000px) {
+        
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        
+        } // 1000px Ends ---->
+
+        }
+
+        // No CSS Grid fallbacks (in conjunction with loaded polyfill)
+        @at-root {
+            .no-cssgrid {
+                .image-gallery__grid {
+                    grid-template-columns: 1fr 1fr 1fr;
+                }
+            }
+        } // root Ends ---->
+    } // grid Ends ---->
+
+    &__item {
+        text-decoration: none;
+
+        // reset span on mobile
+        /* Media (550px)
+        -------------------------------------------------- */
+        @media screen and (max-width: 550px) {
+        
+            grid-column: span 1 !important;
+        
+        } // 550px Ends ---->
+
+        &-image {
+            position: relative;
+            width: 100%;
+            height: 100%;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+                // IE Polyfill
+                font-family: 'object-fit: cover; object-position: center;';
+            }
+
+            figcaption {
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                margin: auto;
+                justify-content: center;
+                align-items: flex-end;
+                color: rgba($text-color, 0.7);
+                text-align: center;
+                color: $white;
+                text-shadow: 1px 1px 2px rgba($black, 0.25);
+                opacity: 0;
+                transition: opacity 0.25s;
+
+                span {
+                    display: block;
+                    flex-basis: 100%;
+                    background: rgba($black, 0.8);
+                    padding: 0.5em;
+                }
+
+                i {
+
+                }
+
+            }
+        } // figure Ends ---->
+
+
+        // hover styles
+        &:hover {
+            img {
+                box-shadow: 0 5px 5px rgba($black, 0.35);
+                transition: box-shadow 0.25s;
+            }
+
+            figcaption {
+                opacity: 1;
+                transition: opacity 0.25s;
+            }
+        }
+    } // item Ends ---->
+
+} // image gallery Ends ---->

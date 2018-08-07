@@ -1,0 +1,52 @@
+/* =============================================================================
+Various Helper Classes
+============================================================================= */
+
+// Hide on screen, but keep available for screen readers
+.visually-hidden { 
+    clip: rect(1px, 1px, 1px, 1px); 
+    height: 1px; 
+    overflow: hidden; 
+    position: absolute; 
+    white-space: nowrap; 
+    width: 1px; 
+}
+
+// Hide element
+.hidden {
+    display: none;
+}
+
+// Box shadows
+.box-shadow {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+
+// Skip link
+.skip {
+    position: absolute;
+    display: inline-block;
+    top: -1000px;
+    left: -1000px;
+    height: 1px;
+    width: 1px;
+    text-align: left;
+    overflow: hidden;
+    background: $primary-color;
+    color: #fff;
+    border-radius: 0 0 $border-radius 0;
+    padding: 0.5em;
+    text-decoration: none;
+
+    &:active, 
+    &:focus, 
+    &:hover {
+        left: 0; 
+        top: 0;
+        width: auto; 
+        height: auto; 
+        overflow: visible; 
+        color: #fff;
+    }
+}

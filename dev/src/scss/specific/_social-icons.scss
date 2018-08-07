@@ -1,0 +1,27 @@
+/* =============================================================================
+Social Icons
+============================================================================= */
+
+// social Links
+.social-icons {
+
+    ul {
+        display: flex;
+        margin: 0;
+    }
+
+
+    // Li
+    &__item {
+        list-style-type: none;
+        margin: 0 0.5em;
+
+        a {
+            text-decoration: none;
+        }
+    } // li Ends ---->
+
+    @media screen and (max-width: 768px) {
+        padding: 1em 0;
+    }
+} // social Ends ---->

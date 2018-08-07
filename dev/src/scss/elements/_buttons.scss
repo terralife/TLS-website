@@ -1,0 +1,182 @@
+/*=================================================
+Buttons
+=================================================== */
+
+.btn,
+input.btn,
+input[type="button"],
+.btn:link,
+.btn:visited {
+  color: $tertiary-color;
+  border: solid 1px $tertiary-color;
+  background: $white;
+  display: inline-block;
+  font-size: .83em;
+  font-weight: 400;
+  line-height: 1.1;
+  position: relative;
+  padding: .75em 1.5em;
+  border-radius: $border-radius;
+  transition: $transition;
+  text-decoration: none;
+  text-transform: uppercase;
+  box-shadow: 0 0px 0px rgba($black, 0.35);
+  transform: scale(1.0);
+
+  /*  Generic Button Hover Styling  */
+  /*  ---------------------------------------------------*/
+
+  &:hover {
+    transition: $transition;
+    color: $white;
+    background: $tertiary-color;
+    text-decoration: none;
+    box-shadow: 0 5px 15px rgba($black, 0.25);
+    // transform: scale(1.05);
+  }
+
+  /*  Generic Button Focus Styling  */
+  /*  ---------------------------------------------------*/
+  &:focus,
+  &:active {
+    transition: all, 0.25s;
+    color: $white;
+    background: rgba($secondary-color, 0.9);
+    text-decoration: none;
+    outline: none;
+  }
+
+  } // End Base Button Styles---->
+
+
+/*=================================================
+Alternate Button Styling
+=================================================== */
+
+/* Full-width */
+.btn-full,
+.btn.btn-full {
+  width: 100%;
+}
+
+/* Half  */
+.btn-50 {
+  width: 50%;
+}
+
+/*  Aletrnate Colors  */
+/*  ---------------------------------------------------*/
+.btn.btn-secondary {
+  border-color: $tertiary-color;
+  color: $tertiary-color;
+
+    &:hover {
+      background-color: $tertiary-color;
+      color: $white;
+    }
+}
+
+.btn.btn-tertiary {
+  @include button-bg($tertiary-color);
+}
+
+.btn.btn-white {
+  background-color: transparent;
+  border-color: $white;
+  color: $white;
+  &:hover {
+  background-color: rgba(251, 251, 251, 0.17);
+  }
+}
+
+  /*------------------------------------------------------------------------*\
+  Submit Buttons /  Primary
+  \*------------------------------------------------------------------------*/
+  input[type="submit"],
+  button[type="submit"],
+  .btn.btn-primary,
+  .btn.btn-submit {
+    @extend .btn;
+    @include button-bg($tertiary-color);
+
+    /*  Submit Button Hover Styling  */
+    /*  ---------------------------------------------------*/
+    &:hover {
+      background-color: $secondary-color;
+      border-color: $secondary-color;
+      color: $white;
+    }
+
+    } // End Submit Button Styling ---->
+
+
+
+
+    /*=================================================
+    Slider Arrows
+    =================================================== */
+
+    .tns-controls button {
+      background: none;
+      border-width: 0;
+      outline: none !important;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      font-size: 2em;
+
+      i:before {
+        display: block;
+        color: $primary-color;
+      }
+
+      &[data-controls="prev"] {
+        left: 1em;
+
+        i:before {
+          transform: scaleX(-1);
+        }
+      }
+      &[data-controls="next"] {
+        right: 1em;
+      }
+    }
+
+
+    /*=================================================
+    Slider Dots
+    =================================================== */
+
+    .tns-nav {
+      position: absolute;
+      bottom: 1em;
+      right: 0;
+      left: 0;
+      z-index: 9;
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+
+      button {
+        background: #efefef;
+        border-width: 1px;
+        border-radius: 50%;
+        border-color: darken(#efefef, 10%);
+        font-size: 0;
+        color: transparent;
+        display: block;
+        height: 10px;
+        width: 10px;
+        margin: 0 3px;
+        padding: 0;
+        outline: none !important;
+
+        &.tns-nav-active {
+          background: $primary-color;
+          border-color: darken($primary-color, 10%);
+        }
+      }
+    }

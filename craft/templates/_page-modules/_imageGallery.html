@@ -1,0 +1,40 @@
+<section class="image-gallery">
+    <div class="image-gallery__grid grid container" data-featherlight-gallery
+    data-featherlight-filter="a">
+        {% for image in block.galleryImages %}
+
+        {% if image %}
+        {% set imageWidth = image.width %}
+        {% set imageHeight = image.height %}
+        {% set imageRatio = imageWidth / imageHeight %}
+        {% set imageSpan = ( imageRatio >= 1.3 ? 2 : 1 ) %}
+
+            {% set imageCrop = craft.imager.transformImage(image,
+                [
+                    { width: 600 },
+                ],
+                {
+                    format: 'jpg',
+                    allowUpscale: false,
+                    mode: 'crop',
+                    jpegQuality: 80,
+                    position: image.focusPctX ~ '% ' ~ image.focusPctY ~ '%',
+                    interlace: true
+                }
+            ) %}
+            {% endif %}
+
+        <a href="{{ image.url }}" class="image-gallery__item lightbox" style="grid-column: span {{ imageSpan }}">
+            <figure role="group" class="image-gallery__item-image">
+                <img class="lazyload" src="/assets/images/pre-lazy-load.png"  data-src="{{ imageCrop[0].url }}" alt="{{ image.imageAlt }}">
+                {% if image.imageAlt %}
+                    <figcaption>
+                        <span>{{ image.imageAlt }}</span>
+                    </figcaption>
+                {% endif %}
+            </figure><!-- /.callouts__item-image -->
+        </a><!-- /.image-gallery__item -->
+
+        {% endfor %}
+    </div><!-- /.image-gallery__grid grid container -->
+</section><!-- /.image-gallery -->

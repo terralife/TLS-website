@@ -1,0 +1,55 @@
+/* =============================================================================
+Client Logo Strip
+============================================================================= */
+
+.client-strip {
+    padding: 2em 0;
+    max-width: 1000px;
+    margin-top: auto;
+    margin-bottom: 0;
+
+
+    &__grid {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+
+        /* Media (769px)
+        -------------------------------------------------- */
+        @media screen and (min-width: 769px) {
+        
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        
+        } // 769px Ends ---->
+    }
+
+    &__item {
+        flex: 0 0 auto;
+
+        img {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        /* Media (769px)
+        -------------------------------------------------- */
+        @media screen and (max-width: 768px) {
+        
+            margin: 0.75em 1.5em;
+        
+        } // 768px Ends ---->
+
+        /* Media (350px)
+        -------------------------------------------------- */
+        @media screen and (max-width: 350px) {
+        
+        flex-basis: 30%;
+        margin: 1em 0;
+        filter: grayscale(100%) opacity(40%);
+        
+        } // 350px Ends ---->
+    }
+} // client strip Ends ---->

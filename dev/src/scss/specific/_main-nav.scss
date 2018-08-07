@@ -1,0 +1,288 @@
+/* =============================================================================
+Main Navigation (Desktop Styles)
+============================================================================= */
+
+// Hide on mobile
+.nav-main {
+    display: none;
+}
+
+
+
+/* Media (768px)
+-------------------------------------------------- */
+@media screen and (min-width: 768px) {
+
+    // Hide Mobile Toggle
+    .mobile-toggle {
+        display: none;
+        opacity: 0;
+        visibility: hidden;
+    }
+
+
+    // Add top border
+    .nav-main__base {
+        position: relative;
+
+        &:before {
+            content: '';
+            display: block;
+            height: 1px;
+            width: 100%;
+            position: absolute;
+            top: -1.5em;
+            left: 0;
+            right: 0;
+            background-color: rgba($primary-color, 0.5);
+            transition: top 0.25s;
+        }
+    }
+
+
+    /* First Level
+    =================================================== */
+    .nav-main {
+        display: block;
+
+        // LI Menu Items
+        .level-1 > .menu-item {
+
+        // Last Li
+        &:last-child {
+            margin-right: -1.25em;
+        }
+
+            // a's
+            > a {
+                position: relative;
+                color: $primary-color;
+                font-weight: 400;
+                padding: 0.65em 0.5em;
+                @include fluid-type(padding-left padding-right, 10px, 1100px, 0.25em, 1.25em);
+                white-space: nowrap;
+                @include fluid-type(font-size, 768px, 1600px, 16px, 20px);
+
+                /* Media (769px)
+                -------------------------------------------------- */
+                @media screen and (min-width: 769px) and (max-width: 1100px) {
+                
+                
+                
+                } // 769px Ends ---->
+            }
+
+            // Active state
+            &.active {
+                > a {
+                    // background: $secondary-color;
+                    // color: $white;
+                    position: relative;
+
+                    &:after {
+                        content: '';
+                        position: absolute;
+                        display: block;
+                        left: 20%;
+                        right: 20%;
+                        bottom: 5px;
+                        height: 2px;
+                        background: $primary-color;
+                        opacity: 1;
+                        transition: opacity 0.25s;
+                    }
+                } // a Ends ---->
+
+
+            // Active Hover Styles
+            &:hover {
+                > a {
+                    // background: $secondary-color;
+                    // color: $white;
+
+                    &:after {
+                        opacity: 0;
+                        transition: opacity 0.25s;
+                    }
+                } // a Ends ---->
+            } // hover Ends ---->
+
+            } // active state Ends ---->
+
+            // Has Submenu
+            &.has-children {
+                position: relative;
+            }
+
+            // Mimic active state on hover for items with no children
+            &:not(.has-children):hover > a {
+                position: relative;
+
+                    &:after {
+                        content: '';
+                        position: absolute;
+                        display: block;
+                        left: 20%;
+                        right: 20%;
+                        bottom: 5px;
+                        height: 2px;
+                        background: $primary-color;
+                        opacity: 1;
+                        transition: opacity 0.25s;
+                    }
+            }
+
+        } // menu item Ends ---->
+
+
+        /* Submenus
+        =================================================== */
+        &__sub {
+            display: block;
+            position: absolute;
+            margin: 0;
+            width: 13em;
+            top: 50px;
+            top: 3.3em;
+            padding: 28px 0 0;
+            padding: 1.750em 0 0;
+            left: 50%;
+            transform: translateX(-50%);
+            max-height: 0;
+            opacity: 0;
+            visibility: hidden;
+            text-align: left;
+            transition: top 0.25s ease-in-out;
+
+
+            // submenu LIs
+            > li {
+                text-align: center;
+                background: $secondary-color;
+
+                > a {
+                    position: relative;
+                    padding: 0.75em 1em;
+                    color: $white;
+                    font-weight: 400;
+                    font-size: 1.05em;
+                    z-index: 2;
+                }
+
+                // Hover state 
+                &:hover {
+
+                    // Hide line
+                    &:not(:first-child):before { 
+                        opacity: 0;
+                        transition: opacity 0.25s;
+                    }
+                } // hover Ends ---->
+                > a:hover {
+                    background: $quad-color;
+                }
+
+
+                // Active state 
+                &.active {
+                    // Hide line
+                    &:not(:first-child):before { 
+                        opacity: 0;
+                        transition: opacity 0.25s;
+                    }
+
+                    a {
+                        background: $quad-color; 
+                    }
+                } // active state Ends ---->
+            
+            } // submenu LI Ends ---->
+
+            // First LI
+            > li:first-child {
+                padding-top: 0.75em;
+
+                // Circle
+                &:before {
+                    content: '';
+                    display: block;
+                    position: absolute;
+                    width: 4em;
+                    height: 4em;
+                    top: -0.5em;
+                    left: 50%;
+                    background: $secondary-color;
+                    // background: red;
+                    border-radius: 50%;
+                    transform: translate(-50%, 20%);
+                }
+            }
+
+            // Last LI
+            > li:last-child {
+                box-shadow: 0 3px 5px rgba($black, 0.35);
+            }
+
+            // Border between items
+            > li:not(:first-child):before {
+                content: '';
+                position: absolute;
+                display: block;
+                // top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                height: 1px;
+                margin-top: -1px;
+                width: 70%;
+                background: rgba($white, 0.35);
+                transition: opacity 0.25s;
+            }
+
+            // Display on hover
+            @at-root {
+                .menu-item:hover .nav-main__sub {
+                    opacity: 1;
+                    max-height: 50em;
+                    visibility: visible;
+                    transition: opacity 0.25s;
+                    z-index: 999;
+                } // hover Ends ---->
+            }
+        } // sub-menus Ends ---->
+
+
+        // Megamenus
+        &__mega {
+            // Styles go here
+        }
+
+    } // main navigation (desktop) Ends ---->
+
+
+} // 768px Ends ---->
+
+
+/*=================================================
+Responsive Pre-mobile Styles
+=================================================== */
+
+/* Media (768px)
+-------------------------------------------------- */
+@media screen and (min-width: 768px) and (max-width: 900px ) {
+
+    .nav-main {
+
+        // LI Menu Items
+        .level-1 > .menu-item {
+
+            // a's
+            > a {
+                color: $primary-color;
+                font-weight: 400;
+                // font-size: 1em;
+                // padding: 0.65em 1em;
+            }
+        } // li Ends ---->
+    } // main nav Ends ---->
+
+} // 768px Ends ---->

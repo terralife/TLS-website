@@ -1,0 +1,6 @@
+<section class="client-strip container client-strip__grid">
+    {% for client in clients.clients %}
+    {% set clientImage = client.clientLogo.first() %}
+    <figure role="group" class="client-strip__item"><img src="{{ clientImage.url }}" alt=""></figure><!-- /.client-strip__item -->
+    {% endfor %}
+</section><!-- /.client-strip container client-strip__grid -->

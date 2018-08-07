@@ -1,0 +1,31 @@
+/* =============================================================================
+Breadcrumbs
+============================================================================= */
+
+.breadcrumbs {
+    ul {
+        padding: 1em 0;
+        margin: 0;
+        
+        li {
+            list-style-type: none;
+            margin: 0;
+            display: inline-block;
+
+            // Add spacer to items with links (everything but last)
+            &:not(.breadcrumbs__current):after {
+                content: ' > ';
+            }
+
+            a {
+                text-decoration: none;
+                display: inline-block;
+            }
+
+            span {
+                font-weight: 700;
+            }
+        } // li Ends ---->
+    } // ol Ends ---->
+
+} // breadcrumbs Ends ---->

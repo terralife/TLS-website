@@ -1,0 +1,45 @@
+/*=================================================
+Containers
+=================================================== */
+
+.noscroll {
+	overflow: hidden;
+}
+
+.wrapper {
+	width: 100%;
+	max-width: $site-width;
+	margin: 0 auto;
+	background-color: $white;
+	min-height: 100vh;
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: stretch;
+	justify-content: space-between;
+	
+	/* Media (769px)
+	-------------------------------------------------- */
+	@media screen and (min-width: 769px) {
+	
+	
+	
+	} // 769px Ends ---->
+}
+
+.container {
+	position: relative;
+	width: 96%;
+	max-width: $container-width;
+	margin: 0 auto;
+
+	/* Media (1099px)
+	-------------------------------------------------- */
+	@media screen and (max-width: 1099px) {
+	
+	width: 90%;
+	
+	} // 1099px Ends ---->
+}
+
+
+

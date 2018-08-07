@@ -1,0 +1,118 @@
+{# This file will also be called from the 
+#  "_page-modules/_contact-form.html" matrix block template #}
+
+{# Additional Documentation:  https://github.com/am-impact/amforms 
+#   Clone this HTML template to create a new form #}
+
+{# match this to the form handle in the admin under 'Contact Forms'. #}
+{% set formName = 'mainContact' %}
+{% set form = craft.amForms.getForm(formName) %}
+
+<section class="main-contact">
+    <div class="main-contact__grid flex container">
+
+        <div class="main-contact__location">
+            <h3 class="main-contact__location-title">
+                Head Office
+            </h3><!-- /.main-contact__location-title -->
+
+            <h4 class="main-contact__location-address">
+                <a href="https://www.google.com/maps/place/{{ socialMedia.globalContactAddress }}/">
+                    <i class="icon-location"></i><!-- /.icon-location -->
+                    {{ socialMedia.globalContactAddress|nl2br }}
+                </a>
+            </h4><!-- /.main-contact__location-email -->
+            <h4 class="main-contact__location-phone">
+                <a href="tel:{{ socialMedia.globalContactPhone }}">
+                    <i class="icon-phone"></i><!-- /.icon-phone -->
+                    {{ socialMedia.globalContactPhone }}
+                </a>
+            </h4><!-- /.main-contact__location-phone -->
+            <h4 class="main-contact__general-email">
+                For general inquiries:<br /><a href="mailto:{{ socialMedia.globalGeneralEmail }}">
+                    <i class="icon-envelope-o"></i><!-- /.icon-email -->
+                    {{ socialMedia.globalGeneralEmail }}
+                </a>
+            </h4><!-- /.main-contact__location-email -->
+            <h4 class="main-contact__business-email">
+                To discuss business opportunities:<br /><a href="mailto:{{ socialMedia.globalBusinessEmail }}">
+                    <i class="icon-envelope-o"></i><!-- /.icon-email -->
+                    {{ socialMedia.globalBusinessEmail }}
+                </a>
+            </h4><!-- /.main-contact__location-email -->
+            <h4 class="main-contact__employment-email">
+                For employment inquiries:<br /><a href="mailto:{{ socialMedia.globalEmploymentEmail }}">
+                    <i class="icon-envelope-o"></i><!-- /.icon-email -->
+                    {{ socialMedia.globalEmploymentEmail }}
+                </a>
+            </h4><!-- /.main-contact__location-email -->
+            
+        </div><!-- /.main-contact__location -->
+        <form method="post" action="" accept-charset="UTF-8" class="contact-form main-contact__form">
+            {{ getCsrfInput() }}
+
+            <h2 class="main-contact__form-title">
+                Get in Touch
+            </h2><!-- /.main-contact__form-title -->
+        
+            {# This should always be here! #}
+            <input type="hidden" name="action" value="amForms/submissions/saveSubmission">
+            <input type="hidden" name="handle" value="{{ form.handle }}">
+            <input type="hidden" name="namespace" value="{{ form.getNamespace() }}">
+        
+            {# Optional: Anti-spam protection. #}
+            {{ craft.amForms.displayAntispam() }}
+        
+            <div class="contact-form__grid flex">
+        
+        
+            {# Duplicate these sections for each field in your form. 
+                fields are added to a form in the admin #}
+        
+            {# First Name field #}
+            <div class="field-group contact-form__input-full">
+                {{ form.displayField('firstName') }}
+            </div>
+
+            {# Last Name field #}
+            <div class="field-group contact-form__input-full">
+                {{ form.displayField('lastName') }}
+            </div>
+        
+            {# Email field #}
+            <div class="field-group contact-form__input-full">
+                {{ form.displayField('emailAddress') }}
+            </div>
+        
+            {# Comment field #}
+            <div class="field-group contact-form__input-full">
+                {{ form.displayField('comment') }}
+            </div>
+        
+            {# Google reCAPTCHA protection. #}
+            <div class="field-group contact-form__input-full">
+                {{ craft.amForms.displayRecaptcha() }}
+            </div>
+        
+             
+        
+            <span class="required">* Required Fields</span><!-- /.required -->
+        
+            <div class="field-group contact-form__input-full">
+                <input role="button" type="submit" value="Submit">
+            </div>
+        
+            </div><!-- /.contact-form__grid flex -->
+        
+            <div class="contact-form__confirmation hidden">
+                    {{ form.afterSubmitText|default('Thanks for your submission.'|t) }}
+            </div><!-- /.contact-form__confirmation -->
+
+            <div class="form-loader">
+                    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+            </div><!-- /.form-loader -->
+        
+        </form>
+    </div><!-- /.main-contact__grid container -->
+</section><!-- /.main-contact -->
+

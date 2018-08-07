@@ -1,0 +1,9 @@
+{# This will search the "_partials/_forms/" directory for an html file
+#  with the handle set on the contact form matrix block #}
+
+<section class="module-form">
+    <div class="container">
+        {% set displayForm = block.formHandle %}
+        {% include "_partials/_forms/_" ~ displayForm ~ ".html" %}
+    </div><!-- /.container -->
+</section><!-- /.contact-form -->

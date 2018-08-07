@@ -1,0 +1,72 @@
+{% if block.children|length %}
+{% set addCalloutsClass = block.addCalloutsClass %}
+<section class="callouts {% if block.addCalloutsClass %}{{ addCalloutsClass }}{% endif %}"{% if block.calloutMargins %}style="margin-top:{{ block.calloutMarginTop }}em; margin-bottom: {{ block.calloutMarginBottom }}em"  {% endif %}>
+
+    <div class="callouts__grid grid container {{ block.calloutsPerRow }}">
+        {% for callout in block.children %}
+
+        {# Define fields #}
+        {% set lightBlueCalloutTitle = callout.lightBlueCalloutTitle %}
+        {% set calloutTitle = callout.calloutTitle %}
+        {% set calloutCaption = callout.calloutCaption %}
+        {% set calloutAlignment = callout.CalloutContentAlignment %}
+        {% set calloutLinkText = callout.linkText %}
+        {% if calloutLinkText|length %}
+            {% set calloutLinkUrl = ( callout.linkExternal ? callout.linkExternalUrl : ( callout.linkInternal.first() ? callout.linkInternal.first().url : '') ) %}
+            {% set linkTarget = ( callout.linkTarget != 0 ? '_blank' : '_self' ) %}
+        {% endif %}
+        {% set calloutImage = callout.calloutImage.first() %}
+        {% set calloutImageShape = callout.calloutImageShape %}
+        {% if calloutImage %}
+            {% set calloutImageCrop = craft.imager.transformImage(calloutImage,
+                [
+                    { width: 500 },
+                ],
+                {
+                    format: 'jpg',
+                    allowUpscale: false,
+                    mode: 'crop',
+                    jpegQuality: 80,
+                    position: calloutImage.focusPctX ~ '% ' ~ calloutImage.focusPctY ~ '%',
+                    interlace: true
+                }
+            ) %}
+            {% endif %}
+
+            {% if calloutImageShape == 'hexagon' %}
+                <svg style="width: 0; height: 0; position: absolute;">
+                    <defs>
+                      <clipPath id="polygon-clip-hexagon" clipPathUnits="objectBoundingBox">
+                        <polygon points="0.5 0, 1 0.25, 1 0.75, 0.5 1, 0 0.75, 0 0.25" />
+                      </clipPath>
+                    </defs>
+                  </svg>
+            {% endif %}
+
+            <div class="callouts__item align--{{ calloutAlignment }}">
+                {{ ( calloutLinkText|length ? '<a href="' ~ calloutLinkUrl ~ '" title="' ~ calloutTitle ~ '" target="' ~ linkTarget ~ '">' : '' )|raw }}
+                {% if calloutImage %}
+                    <figure role="group" class="callouts__item-image {{ calloutImageShape }}">
+                        <img class="lazyload" src="/assets/images/pre-lazy-load.png"  data-src="{{ calloutImageCrop[0].url }}" alt="{{ calloutImage.imageAlt }}">
+                    </figure><!-- /.callouts__item-image -->
+                {% endif %}
+                {{ ( calloutLinkText|length ? '</a>' : '' ) }}
+                <div class="callouts__item-inner">
+                    {% if calloutTitle or lightBlueCalloutTitle %}
+                        <h3 class="callouts__item-title">
+                            <span class="light-blue">{{ lightBlueCalloutTitle }}</span> {{ calloutTitle }}
+                        </h3><!-- /.callouts__item-title -->
+                    {% endif %}
+                    {% if calloutCaption %}
+                        <div class="callouts__item-caption">
+                            {{ calloutCaption }}
+                        </div><!-- /.callouts__item-caption -->
+                    {% endif %}
+
+                    {{ ( calloutLinkText|length ? '<a href="' ~ url(calloutLinkUrl) ~ '" title="' ~ calloutTitle ~ '" target="' ~ linkTarget ~ '" class="btn btn-primary">' ~ calloutLinkText ~ '</a>' : '' )|raw }}
+                </div><!-- /.callouts__item-inner -->
+            </div><!-- /.callouts__item -->
+        {% endfor %}
+    </div><!-- /.callouts__grid grid container -->
+</section><!-- /.callouts -->
+{% endif %}

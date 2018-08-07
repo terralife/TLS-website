@@ -1,0 +1,62 @@
+/* =============================================================================
+Pre Header
+============================================================================= */
+
+.pre-header {
+    padding: 0.35em 0;
+
+    
+    // Menu
+    .nav-pre {
+        width: 90%;
+  
+         // Main UL
+        &__base {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        // Top Level LIs
+        .menu-item {
+            // flex: 1 1 auto;
+
+            // a and Horizontal seperators
+            &:not(:first-of-type) a{
+
+                &:before {
+                    content: '|';
+                    display: inline-block;
+                    color: rgba($primary-color, 0.5);
+                    padding: 0 1em; 
+                }
+            } // a Ends ---->
+
+            > a {
+                text-transform: uppercase;
+                font-size: 0.75em;
+            }
+        } // li Ends ---->
+    } // nav Ends ---->
+    
+    a {
+        color: $primary-color;
+    }
+} // pre-header Ends ---->
+
+
+/* Media (768px)
+-------------------------------------------------- */
+@media screen and (max-width: 768px) {
+
+    .header > .pre-header {
+        overflow: hidden;
+        max-height: 3px;
+
+        ul {
+            display: none;
+        }
+    }
+
+} // 768px Ends ---->

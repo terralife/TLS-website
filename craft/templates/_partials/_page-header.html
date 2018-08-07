@@ -1,0 +1,45 @@
+{# get Page header, or get default set in Globals #}
+{% if entry.pageHeader.first() %}
+    {% set pageHeaderImage = entry.pageHeader.first() %}
+{% else %}
+    {% set pageHeaderImage = globals.defaultPageHeader.first() %}
+{% endif %}
+
+{# Use Imager and FocalPoint to generate srcset, crop, and quality #}
+{% if pageHeaderImage %}
+{% set focusedPageHeader = craft.imager.transformImage(pageHeaderImage,
+    [
+        { width: 1440},
+        { width: 1024},
+        { width: 768, jpegQuality: 65 },
+    ],
+    {
+        format: 'jpg',
+        allowUpscale: false,
+        mode: 'crop',
+        jpegQuality: 80,
+        position: pageHeaderImage.focusPctX ~ '% ' ~ pageHeaderImage.focusPctY ~ '%',
+        interlace: true
+    }
+) %}
+{% endif %}
+
+<section class="page-header">
+    <figure role="group" class="page-header__image">
+            {% if pageHeaderImage %}
+                <img class="lazyload" src="/assets/images/pre-lazy-load.png" data-src="{{ focusedPageHeader[1].url }}"
+            data-sizes="(max-width: 1440px) 100vw, (min-width: 1440px) 1440px"
+            data-srcset="{{ craft.imager.srcset(focusedPageHeader) }}"
+            alt="{{ pageHeaderImage.imageAlt }}" />
+            {% endif %}
+    </figure><!-- /.page-header__image -->
+    <div class="page-header__overlay"></div><!-- /.page-header__overlay -->
+    <div class="container flex page-header__grid">
+        <h1 class="page-header__title">{{ entry.title }}</h1><!-- /.page-header__title -->
+        {% if entry.pageHeaderCaption %}
+            <div class="page-header__caption">
+                {{ entry.pageHeaderCaption }}
+            </div><!-- /.page-header__caption -->
+        {% endif %}
+    </div><!-- /.container -->
+</section><!-- /.page-header -->

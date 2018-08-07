@@ -1,0 +1,67 @@
+{% set addHeroClass = block.addHeroClass %}
+<section class="hero {{ addHeroClass }}">
+    <div class="hero__slides" {{ (block.children|length > 1 ? 'id="hero-slider"' : '') }}>
+    {% for heroSlide in block.children %}
+    {% set addHeroClass = heroSlide.addHeroClass %}
+        <div class="hero__slide">
+
+                {% set heroImage = heroSlide.heroImage.first() %}
+                {% if heroImage %}
+                    {% set heroCrop = craft.imager.transformImage(heroImage,
+                        [
+                            { width: 1440 },
+                            { width: 768, jpegQuality: 65 },
+                        ],
+                        {
+                            format: 'jpg',
+                            allowUpscale: false,
+                            mode: 'crop',
+                            jpegQuality: 80,
+                            position: heroImage.focusPctX ~ '% ' ~ heroImage.focusPctY ~ '%',
+                            interlace: true
+                        }
+                    ) %}
+                
+                    <figure role="group" class="hero__slide-image bg-image">
+                        <div class="hero__slide-overlay overlay"></div><!-- /overlay -->
+                        <img class="lazyload" src="/assets/images/pre-lazy-load.png" data-src="{{ heroCrop[1].url }}"
+                        data-sizes="(max-width: 1440px) 100vw, (min-width: 1440px) 1440px"
+                        data-srcset="{{ craft.imager.srcset(heroCrop) }}"
+                        alt="{{ heroImage.imageAlt }}">
+                    </figure><!-- /.hero__slide-image background-image -->
+                {% endif %}
+            
+                <div class="container flex hero__slide-grid">
+                    {# Define Fields #}
+                    {% set slideTitle = heroSlide.heroTitle %}
+                    {% set optionalText = heroSlide.optionalText %}
+                    {% set slideLink = heroSlide.linkDisplay %}
+
+                    {% if slideTitle %}
+                        <h2 class="hero__slide-title">
+                            {{ slideTitle }}
+                        </h2><!-- /.hero__slide-title -->
+                    {% endif %}
+
+                    {% if optionalText %}
+                        <span class="hero__slide-text">
+                            {{ optionalText }}
+                        </span><!-- /.hero__slide-text -->
+                    {% endif %}
+
+                    {% if slideLink %}
+                    <div class="hero__slide-link">
+                        {% set slideUrl = ( heroSlide.linkExternal ? heroSlide.linkExternalUrl : heroSlide.linkInternal.first() ) %}
+                        <a class="btn btn-primary" href="{{ slideUrl }}" title="{{ heroSlide.linkText }}"{% if heroSlide.linkTarget %} target="_blank" rel="noopener noreferrer"{% endif %}>
+                            {{ heroSlide.linkText }}
+                        </a>
+                    </div><!-- /.hero__slide-link -->
+                    {% endif %}
+                    </div><!-- /flex container -->
+
+        </div><!-- /.hero__slide -->
+    {% endfor %}
+    
+        
+    </div><!-- /.hero__slides -->
+    </section><!-- /.hero -->

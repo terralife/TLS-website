@@ -1,0 +1,59 @@
+/* =============================================================================
+FAQ Module
+============================================================================= */
+
+.faq-module {
+    padding: 2em 0;
+
+    &__item {
+
+        &-title {
+            cursor: pointer;
+        } // title Ends ---->
+
+        &-toggle {
+            top: 0.25em;
+            width: 25px;
+            height: 25px;
+            display: inline-block;
+            margin-right: 1em;
+            border-radius: 50%;
+            border: 1px solid rgba($primary-color, 0.35);
+            position: relative;
+            transform: rotate(0deg);
+            transition: transform 0.15s ease-in-out;
+
+            i {
+                position: absolute;
+                font-size: 0.7em;
+                display: block;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                line-height: 25px;
+            }
+        } // toggle Ends ---->
+
+        &-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.25s ease-in-out;   
+        }
+
+
+        // Open state
+        &.open {
+
+            .faq-module__item-toggle {
+                transform: rotate(180deg);
+                transition: transform 0.15s ease-in-out;
+            }
+
+            .faq-module__item-content {
+                max-height: 20em;
+                overflow-y: scroll;
+                transition: max-height 0.25s ease-in-out;
+            } 
+        } // open state Ends ---->
+    } // item Ends ---->
+} // faqs Ends ---->

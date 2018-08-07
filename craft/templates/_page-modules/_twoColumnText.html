@@ -1,0 +1,11 @@
+{% set addTwoColumnClass = block.addTwoColumnClass %}
+<section class="two-col {% if block.addTwoColumnClass %}{{ addTwoColumnClass }}{% endif %}">
+    <div class="container flex two-col__grid">
+        <div class="two-col__col1">
+            {{ block.twoCol1 }}
+        </div><!-- /.two-col__col1 -->
+        <div class="two-col__col2">
+            {{ block.twoCol2 }}
+        </div><!-- /.two-col__col2 -->
+    </div><!-- /.container flex two-col__grid -->
+</section><!-- /.two-col -->

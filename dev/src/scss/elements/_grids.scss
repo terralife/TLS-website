@@ -1,0 +1,29 @@
+/*=================================================
+Flexbox Grids
+=================================================== */
+
+// Turn off flex on mobile screens (display:block instead)
+// If you want flex on certain elements at smaller sizes
+// re-add display: flex to that element in a media query
+
+.flex {
+  display: block;
+
+  /* Media (768px)
+  -------------------------------------------------- */
+  @media screen and (min-width: 768px) {
+    display: flex;
+  } // 768px Ends ---->
+} // grid Ends ---->
+
+
+.grid {
+  display: grid;
+
+  /* Media (768px)
+  -------------------------------------------------- */
+  @media screen and (min-width: 768px) {
+    // display: grid;
+  } // 768px Ends ---->
+} // grid Ends ---->
+

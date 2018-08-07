@@ -1,0 +1,67 @@
+{% for sideX in block.children %}
+    {% set addSideBySideClass = block.addSideBySideClass %}
+    {% set moduleSideBySideBlueTitle = sideX.moduleSideBySideBlueTitle %}
+    {% set sideXTitle = sideX.sideXTitle %}
+    {% set sideXSubtitle = sideX.sideXSubTitle %}
+    {% set sideXCaption = sideX.sideXCaption %}
+    {% set sideXLink = sideX.linkText %}
+    {% set sideXLayout = sideX.sideXLayout %}
+    {% set sideXBGColor = sideX.sideXBackgroundColor %}
+    {% set sideXImage = sideX.sideXimage.first() %}
+
+        {% if sideXImage %}
+            {% set sideXCrop = craft.imager.transformImage(sideXImage,
+                [
+                    { width: 1440 },
+                    { width: 768, jpegQuality: 65 },
+                ],
+                {
+                    format: 'jpg',
+                    allowUpscale: false,
+                    mode: 'crop',
+                    jpegQuality: 80,
+                    position: sideXImage.focusPctX ~ '% ' ~ sideXImage.focusPctY ~ '%',
+                    interlace: true
+                }
+            ) %}
+            {% endif %}
+
+    <section class="side-side {{ sideXLayout }} {% if block.addSideBySideClass %}{{ addSideBySideClass }}{% endif %}" style="background-color: {{ sideXBGColor }};">
+        <div class="side-side__flex flex">
+
+            <figure role="group" class="side-side__image">
+                <img class="lazyload" src="/assets/images/pre-lazy-load.png" data-src="{{ sideXCrop[1].url }}"
+                data-sizes="(max-width: 1440px) 100vw, (min-width: 1440px) 1440px"
+                data-srcset="{{ craft.imager.srcset(sideXCrop) }}"
+                alt="{{ sideXImage.imageAlt }}" style="object-position: {{ sideXImage.focusPctX }}% {{ sideXImage.focusPctY }}%;">
+            </figure><!-- /.side-side__image -->
+
+            <div class="side-side__content">
+                <div class="side-side__content-inner">
+                    {% if sideXSubtitle %}
+                    <h4 class="side-side__content-subtitle">
+                        {{ sideXSubtitle }}
+                    </h4><!-- /.side-side__content-subtitle -->
+                    {% endif %}
+                    {% if sideXTitle or moduleSideBySideBlueTitle %}
+                    <h3 class="side-side__content-title">
+                        <span class="light-blue">{{ moduleSideBySideBlueTitle }}</span> {{ sideXTitle }}
+                    </h3><!-- /.side-side__content-title -->
+                    {% endif %}
+                    {% if sideXCaption %}
+                    <div class="side-side__content-caption">
+                        {{ sideXCaption }}
+                    </div><!-- /.side-side__content-caption -->
+                    {% endif %}
+                    {% if sideXLink %}
+                    {% set sideXLinkUrl = ( sideX.linkExternal ? sideX.linkExternalUrl : sideX.linkInternal.first() ) %}
+                    <a href="{{ sideXLinkUrl }}" class="side-side__content-link btn btn-secondary" {% if sideX.linkTarget %} target="_blank" rel="noopener noreferrer"{% endif %}>
+                        {{ sideXLink }}
+                    </a><!-- /.side-side__content-link btn btn-white -->
+                    {% endif %}
+                </div><!-- /.side-side__content-inner -->
+            </div><!-- /.side-side__content -->
+        </div><!-- / side-side__flex flex -->
+    </section><!-- /.side-side -->
+
+    {% endfor %}

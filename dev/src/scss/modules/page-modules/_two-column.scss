@@ -1,0 +1,27 @@
+/* =============================================================================
+Two Column Text
+============================================================================= */
+
+.two-col {
+    padding: 3em 0;
+
+    &__grid {
+        justify-content: space-between;
+        align-items: stretch;
+
+
+        // Both columns
+        > div {
+            flex: 0 1 48%;
+
+            h1, h2, h3, h4 {
+                
+            }
+
+            p:first-child {margin-top: 0;}
+        } // columns Ends ---->
+    } // grid Ends ---->
+
+
+
+} // two column text Ends ---->

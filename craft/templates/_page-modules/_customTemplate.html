@@ -1,0 +1,7 @@
+{# include a template by setting it's readable name and actual template location
+in the field-group:  "Module - Include Template"
+This is useful if you want to include a custom template within the page-modules matrix loop #}
+
+{% set includeTemplate = block.includeTemplate %}
+
+{% include "" ~ block.includeTemplate %}

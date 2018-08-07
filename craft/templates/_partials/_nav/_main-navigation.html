@@ -1,0 +1,39 @@
+<nav class="nav-main header__nav" aria-label="main navigation">
+    <ul class="nav-main__base level-1">
+        {% set navigation = mainNavigation.mainNavigation.level(1) %}
+        {% nav node in navigation %}
+        
+            {# Top Level Items #}
+            <li class="menu-item menu-item-top menu-item-{{ ( node.linkExternal ? 'external' : node.linkInternal.first().slug ) }}{{ (node.children|length ? ' has-children' : '' ) }}{{ ( node.linkExternal ? '' : (node.linkInternal.first().uri == craft.request.getSegment(node.level)|lower ? ' active' : '') ) }}">
+                {% set nodeUrl = ( node.linkExternal ? node.linkExternalUrl : node.linkInternal.first().url ) %}
+                <a href="{{ url(nodeUrl|lower) }}" title="{{ node.linkText }}"{% if node.linkTarget %} target="_blank" rel="noopener noreferrer"{% endif %}>
+                    {{ node.linkText }}
+                </a>
+
+                {# sub Items #}
+                {% if node.children is not empty %}
+                    <ul class="nav-main__sub level-2">
+                        {% for childNode in node.children  %}
+                                {% set childNodeUrl = ( childNode.linkExternal ? childNode.linkExternalUrl : childNode.linkInternal.first().url ) %}
+                                {% set childNodeURI = craft.request.getSegment(node.level) ~ '/' ~ craft.request.getSegment(childNode.level)%}
+                            <li class="menu-item menu-item-sub menu-item-{{ ( childNode.linkExternal ? 'external' : childNode.linkInternal.first().slug ) }} {{ ( childNode.linkExternal ? '' : (childNode.linkInternal.first().uri == childNodeURI ? 'active' : '') ) }}">
+                                <a href="{{ childNodeUrl }}" title="{{ childNode.linkText }}"{% if childNode.linkTarget %} target="_blank" rel="noopener noreferrer"{% endif %}>
+                                    {{ childNode.linkText }}
+                                </a>
+                            </li><!-- /sub item-->
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </li><!-- /top level item -->
+        {% endnav %}
+    </ul>
+</nav>
+
+<div class="mobile-toggle" id="mobile-toggle">
+    <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div><!-- /.hamburger -->
+    <div class="text">Menu</div>
+</div><!-- /.mobile-toggle -->

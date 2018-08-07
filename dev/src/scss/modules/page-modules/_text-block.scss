@@ -1,0 +1,66 @@
+/* =============================================================================
+Text Block Page Module
+============================================================================= */
+
+.text-block {
+    padding: 2em 0;
+    
+
+
+    /*=================================================
+    Layout Styles
+    =================================================== */
+
+    // full-width, left aligned
+    &.fullWidthLeft {
+
+    }
+
+    // full-width, centre aligned
+    &.fullWidthCenter {
+        text-align: center;
+    }
+
+    // full-width, right aligned
+    &.fullWidthRight {
+        text-align: right;
+    }
+
+    // 50% Width, on the left
+    &.halfLeft {
+        /* Media (1024px)
+        -------------------------------------------------- */
+        @media screen and (min-width: 1024px) {
+        
+            .text-block__wrap {
+                width: 50%;
+            }
+        
+        } // 1024px Ends ---->
+    }
+
+    // 50% Width, on the right
+    &.halfRight {
+        /* Media (1024px)
+        -------------------------------------------------- */
+        @media screen and (min-width: 1024px) {
+        
+            .text-block__wrap {
+                width: 50%;
+                margin-left: 50%;
+            }
+            
+            } // 1024px Ends ---->
+    }
+
+
+    // Title
+    &__title {
+        @include fluid-type(font-size, 320px, 1600px, 36px, 52px);
+        text-transform: none;
+        color: $primary-color;
+        font-weight: 300;
+        margin-bottom: 0.25em;
+    }
+
+} // text block Ends ---->

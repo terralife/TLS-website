@@ -1,0 +1,121 @@
+/* =============================================================================
+Page Headers
+============================================================================= */
+
+.page-header {
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+
+    /* Media (768px)
+    -------------------------------------------------- */
+    @media screen and (min-width: 768px) {
+    
+    height: 300px;
+    
+    } // 768px Ends ---->
+
+    // Background Image
+    &__image {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        height: 100%;
+
+        img {
+            object-fit: cover;
+            object-position: center;
+            width: 100%;
+            height: 100%;
+            // IE Polyfill
+            font-family: 'object-fit: cover; object-position: center;';
+        }
+    } // image Ends ---->
+
+    /* Media (768px)
+    -------------------------------------------------- */
+    @media screen and (max-width: 768px) {
+    
+        &__overlay {
+            background: rgba($black, 0.4);
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            height: 100%;
+        }
+
+        
+    } // 768px Ends ---->
+
+    // Grid
+    &__grid {
+        display: flex;
+        justify-content: flex-start;
+        align-content: center;
+        align-items: center;
+        height: 100%;
+        flex-wrap: wrap;
+    }
+
+    // title 
+    &__title {
+        padding: 0.5em 0;
+        color: $white;
+        margin: 0;
+        @include fluid-type(font-size, 320px, 1600px, 34px, 72px);
+        line-height: 1;
+        font-weight: 300;
+        color: $white;
+        text-shadow: 0 2px 5px rgba($black, 0.35);
+        flex-basis: 100%;
+    }
+
+    // Caption
+    &__caption {
+        flex-basis: 100%;
+        font-weight: 300;
+        color: $white;
+        text-shadow: 0 2px 5px rgba($black, 0.35);
+        margin-top: -1.75em;
+        margin-bottom: 1em;
+    }
+
+    &__title,
+    &__caption {
+
+        /* Media (768px)
+        -------------------------------------------------- */
+        @media screen and (min-width: 768px) {
+        
+            max-width: 51%;
+        
+        } // 768px Ends ---->
+
+    } // caption/title Ends ---->
+
+
+
+        p:first-child {
+            margin-top: 0;
+        }
+
+        /* Media (650px)
+        -------------------------------------------------- */
+        @media screen and (max-width: 650px) {
+        
+        &__title {
+            margin-bottom: 1em;
+        }
+
+        &__caption {
+            line-height: 1.2;
+        }
+        
+        } // 650px Ends ---->
+
+
+} // page header Ends ---->
