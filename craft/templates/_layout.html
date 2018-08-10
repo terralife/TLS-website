@@ -26,7 +26,7 @@
 
 	<body>
 		{% if scripts.headerScripts %}
-			{{ scripts.headerScripts }}
+			{{ scripts.headerScripts|raw }}
 		{% endif %}
 
 		<div class="wrapper">
@@ -141,7 +141,18 @@
 				window.csrfTokenValue = "{{ craft.request.csrfToken|e('js') }}";
 			</script>
 			{% endminify %}
+			
+			
+			<!-- Global site tag (gtag.js) - Google Analytics -->
+			<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115929190-1"></script>
+			<script>
+  			window.dataLayer = window.dataLayer || [];
+  			function gtag(){dataLayer.push(arguments);}
+  			gtag('js', new Date());
 
+ 			gtag('config', 'UA-115929190-1');
+			</script>
+			
 		</div><!-- /.wrapper -->
 
 		{# Include off-canvas mobile menu #}
@@ -154,7 +165,7 @@
 
 		{# Include Footer Scripts #}
 		{% if scripts.footerScripts %}
-			{{ scripts.footerScripts }}
+			{{ scripts.footerScripts|raw }}
 		{% endif %}
 
 
