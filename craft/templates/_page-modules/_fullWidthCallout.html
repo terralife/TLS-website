@@ -8,6 +8,9 @@
 {% set fwCalloutTitle = block.fwCalloutTitle %}
 {% set fwCalloutCaption = block.fwCalloutContent %}
 {% set fwCalloutLinkText = block.linkText %}
+{% if fwCalloutLinkText|length %}
+    {% set fwCalloutLinkUrl = ( block.linkExternal ? block.linkExternalUrl : ( block.linkInternal.first() ? block.linkInternal.first().url : '') ) %}
+{% endif %}
 {% set fwCalloutTextAlign = block.fwCalloutTextAlign %}
 {% set fwCalloutTextInvert = ( block.fwCalloutInvertTextColor ? 'style=color:white; ' : '' ) %}
 
@@ -57,8 +60,8 @@
                     {{ fwCalloutCaption }}
                 </div><!-- /.fw-callout__content-caption -->
                 {% endif %}
-                {% if fwCalloutLinkText %}
-                <a href="" class="fw-callout__content-link btn btn-primary">
+                {% if fwCalloutLinkText  %}
+                <a href="{{fwCalloutLinkUrl}}" class="fw-callout__content-link btn btn-primary">
                     {{ fwCalloutLinkText }}
                 </a><!-- /.fw-callout__content-link btn btn-secondary -->
                 {% endif %}
