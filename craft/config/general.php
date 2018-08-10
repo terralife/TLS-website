@@ -10,7 +10,7 @@
  // Site declaration
  $localURL = 'http://tls.local';
  $stagingURL = 'http://terralife.cornerstonedigital.ca';
- $productionURL = '';
+ $productionURL = 'https://terralifesciences.com';
 
 return array(
 	// All environments
@@ -27,7 +27,7 @@ return array(
 	),
 
 	// Live environment
-	'.com'  => array(
+	'terralifesciences.com'  => array(
 		'devMode' => false,
 		'enableTemplateCaching' => true,
 		'siteUrl' => $productionURL,
